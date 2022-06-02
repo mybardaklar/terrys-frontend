@@ -1,5 +1,5 @@
 export const state = () => ({
-  cartDrawerNav: true,
+  cartDrawerNav: false,
   mobileBottomSheet: false
 });
 
