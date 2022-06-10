@@ -2,10 +2,10 @@ import { mapGetters, mapActions } from 'vuex';
 
 const mixin = {
   computed: {
-    ...mapGetters(['getCartDrawerNav', 'getMobileBottomSheet'])
+    ...mapGetters(['getCartDrawerNav', 'getMobileBottomSheet', 'getUserModal'])
   },
   methods: {
-    ...mapActions(['setCartDrawerNav', 'setMobileBottomSheet'])
+    ...mapActions(['setCartDrawerNav', 'setMobileBottomSheet', 'setUserModal'])
   }
 };
 

@@ -4,7 +4,6 @@
   <VNavigationDrawer
     width="360"
     fixed
-    app
     temporary
     right
     :value="getCartDrawerNav"

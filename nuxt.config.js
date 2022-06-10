@@ -24,7 +24,11 @@ export default {
   css: ['~/assets/styles/globals.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/mixins.js'],
+  plugins: [
+    '~/plugins/mixins.js',
+    '~/plugins/axios.js',
+    { src: '~/plugins/persist.js', ssr: false }
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
@@ -61,7 +65,11 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxt/http'],
+  modules: ['@nuxt/http', '@nuxtjs/axios'],
+
+  axios: {
+    baseURL: 'http://api.floranet.app'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}
