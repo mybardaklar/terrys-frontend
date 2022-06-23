@@ -27,7 +27,8 @@ export default {
   plugins: [
     '~/plugins/mixins.js',
     '~/plugins/axios.js',
-    { src: '~/plugins/persistedState.client.js' }
+    { src: '~/plugins/persistedState.client.js' },
+    { src: '~/plugins/vue-hydration.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -68,7 +69,7 @@ export default {
   modules: ['@nuxt/http', '@nuxtjs/axios'],
 
   axios: {
-    baseURL: 'http://api.floranet.app'
+    baseURL: 'http://localhost:8081'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
