@@ -29,7 +29,12 @@
             v-bind="attrs"
             @click="setCartDrawerNav(true)"
             v-on="on">
-            <VBadge content="0" color="green" offset-x="4" bordered overlap>
+            <VBadge
+              :content="getCartOrderDetails.length > 0 ? getCartOrderDetails.length : '0'"
+              color="green"
+              offset-x="4"
+              bordered
+              overlap>
               <VIcon>fas fa-cart-shopping</VIcon>
             </VBadge>
           </VBtn>

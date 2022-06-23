@@ -36,7 +36,7 @@ export default {
 
   computed: {
     getProductsLength() {
-      return this.products.length;
+      return this.products.count;
     }
   }
 };
@@ -82,7 +82,7 @@ export default {
       </VCol>
     </VRow>
 
-    <ProductList :products="products" />
+    <ProductList :products="products.rows"></ProductList>
   </div>
 </template>
 

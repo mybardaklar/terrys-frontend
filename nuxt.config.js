@@ -27,7 +27,7 @@ export default {
   plugins: [
     '~/plugins/mixins.js',
     '~/plugins/axios.js',
-    { src: '~/plugins/persist.js', ssr: false }
+    { src: '~/plugins/persistedState.client.js' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
