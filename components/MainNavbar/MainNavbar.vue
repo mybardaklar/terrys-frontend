@@ -8,16 +8,16 @@
         <div class="mainNavbar__dropdown">
           <ul>
             <li>
-              <a href="#">Mother's Day</a>
+              <a :href="`/categories/mothers-day`">Mother's Day</a>
             </li>
             <li>
-              <a href="#">Best Sellers</a>
+              <a href="/categories/best-sellers">Best Sellers</a>
             </li>
             <li>
-              <a href="#">Anniversary</a>
+              <a href="/categories/anniversary">Anniversary</a>
             </li>
             <li>
-              <a href="#">Birthday Flowers</a>
+              <a href="/categories/birthday-flowers">Birthday Flowers</a>
             </li>
             <li>
               <a href="#">Business Gifts</a>

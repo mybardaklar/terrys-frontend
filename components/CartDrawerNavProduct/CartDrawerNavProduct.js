@@ -16,10 +16,7 @@ export default {
       type: Number,
       required: true
     },
-    pcs: {
-      type: Number,
-      required: true
-    },
-    extras: {}
+    extras: {},
+    itemIndex: Number
   }
 };

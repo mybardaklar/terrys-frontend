@@ -24,7 +24,12 @@ export default {
   css: ['~/assets/styles/globals.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/mixins.js'],
+  plugins: [
+    '~/plugins/mixins.js',
+    '~/plugins/axios.js',
+    { src: '~/plugins/persistedState.client.js' },
+    { src: '~/plugins/vue-hydration.js', ssr: false }
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
@@ -61,7 +66,11 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxt/http'],
+  modules: ['@nuxt/http', '@nuxtjs/axios'],
+
+  axios: {
+    baseURL: 'http://localhost:8081'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}

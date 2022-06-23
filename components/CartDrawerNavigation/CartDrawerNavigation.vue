@@ -4,7 +4,6 @@
   <VNavigationDrawer
     width="360"
     fixed
-    app
     temporary
     right
     :value="getCartDrawerNav"
@@ -20,7 +19,12 @@
           </VToolbar>
 
           <div class="text-subtitle-2 pa-3 text-uppercase">
-            <strong class="font-weight-black">4 items</strong> in your cart
+            <strong class="font-weight-black">
+              <span
+                v-text="getCartOrderDetails.length > 0 ? getCartOrderDetails.length : '0'"></span>
+              items
+            </strong>
+            in your cart
           </div>
           <VDivider></VDivider>
         </VFlex>
@@ -29,16 +33,16 @@
           <VLayout column fill-height>
             <VFlex fill-height>
               <VList three-line>
-                <div v-for="(product, index) in cart" :key="index">
+                <div v-for="(detail, index) in getCartOrderDetails" :key="index">
                   <div>
                     <CartDrawerNavProduct
-                      :key="index"
-                      :img="product.img"
-                      :title="product.title"
-                      :type="product.type"
-                      :price="product.price"
-                      :pcs="product.pcs"
-                      :extras="product.extras" />
+                      :key="detail.product.id"
+                      :img="detail.product.url"
+                      :title="detail.product.name"
+                      :type="detail.product.sku_type"
+                      :price="detail.details.productDetails.productPrice"
+                      :extras="detail.details.productDetails.addons"
+                      :item-index="index" />
                     <VDivider></VDivider>
                   </div>
                 </div>
@@ -46,7 +50,9 @@
             </VFlex>
             <VFlex>
               <VContainer>
-                <VBtn color="green" block depressed dark>Checkout</VBtn>
+                <VBtn color="green" block depressed dark @click="$router.push('/checkout')">
+                  Checkout
+                </VBtn>
               </VContainer>
             </VFlex>
           </VLayout>
