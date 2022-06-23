@@ -1,0 +1,264 @@
+{
+  "id": 1,
+  "order_id": "1111-1111-1111",
+  "order_tag": "new_order",
+  "devid": "15426",
+  "order_status": "open",
+  "details": {
+    "total_price": 100,
+    "discount_code": 145698,
+    "discount_percent": 0.05,
+    "total_discount_price": 95
+  },
+  "lock_socket_id": "Re7Jooje6vx89qWDAACh",
+  "createdAt": "2022-04-09T20:18:46.000Z",
+  "updatedAt": "2022-06-06T18:15:51.135Z",
+  "customerId": 1,
+  "bankId": 1,
+  "order_details": [
+    {
+      "id": 2,
+      "productId": 100,
+      "price": "40.00",
+      "order_date": 1649524965,
+      "delivery_date": 1649524965,
+      "delivery_details": 0,
+      "details": {
+        "fullfill": {
+          "api": "api test",
+          "vendorId": 1,
+          "floristId": 356,
+          "totalPrice": 996,
+          "floristName": "çiçekçi samet",
+          "floristPhone": "+905445807393",
+          "vendorOrderId": 778
+        },
+        "productDetails": {
+          "tax": 33,
+          "cargo": 10,
+          "addons": [
+            [
+              {
+                "addonId": 45128,
+                "addonName": "addon1",
+                "addonPrice": 3,
+                "addonImageUrl": "https://terrysflorist.com/images/chocolate.jpg"
+              },
+              {
+                "addonId": 45129,
+                "addonName": "addon2",
+                "addonPrice": 5,
+                "addonImageUrl": "https://terrysflorist.com/images/bear.jpg"
+              }
+            ]
+          ],
+          "productPrice": 30
+        }
+      },
+      "createdAt": "2022-04-09T20:22:45.000Z",
+      "updatedAt": "2022-05-25T14:05:28.000Z",
+      "orderId": 1,
+      "vendorId": 1,
+      "product": {
+        "id": 100,
+        "sku_id": "TWR10-1A",
+        "productId": "P_TWR10-1A",
+        "name": "Timeless Cheer Bouquet",
+        "url": "https://img.teleflora.com/images/o_0/l_flowers:TWR10-1A,pg_6/w_272,h_340,cs_no_cmyk,c_pad,g_south/f_auto,q_auto:eco,e_sharpen:200/flowers/TWR10-1A/Teleflora'sTimelessCheerBouquet",
+        "price": "69.99",
+        "sku_type": "Standard"
+      },
+      "delivery": {
+        "id": 1,
+        "firstname": "Samet",
+        "lastname": "Uslu",
+        "zipcode": "78451275",
+        "phone": "+905445807393",
+        "email": "samet_uslu@atasoftware.io",
+        "city": "Eskişehir 26",
+        "state": "9",
+        "message": "İyi ki doğdun :)",
+        "note": "ahmet mehmet",
+        "address1": "Ankara",
+        "address2": "İzmir",
+        "institution": "ptt",
+        "institution_name": "ptt name",
+        "createdAt": "2022-04-09T21:34:03.000Z",
+        "updatedAt": "2022-04-20T13:07:19.000Z",
+        "orderDetailId": 2,
+        "occasionId": null,
+        "occasion": null
+      }
+    },
+    {
+      "id": 3,
+      "productId": 101,
+      "price": "30.00",
+      "order_date": 1649525005,
+      "delivery_date": 1649525005,
+      "delivery_details": 0,
+      "details": {
+        "fullfill": {
+          "api": "api test",
+          "vendorId": 3,
+          "floristId": 356,
+          "totalPrice": 996,
+          "floristName": "çiçekçi samet",
+          "floristPhone": "+905445807393",
+          "vendorOrderId": 778
+        },
+        "productDetails": {
+          "tax": 12,
+          "cargo": 20,
+          "addons": [
+            [
+              {
+                "addonId": 45128,
+                "addonName": "addon1",
+                "addonPrice": 3,
+                "addonImageUrl": "https://terrysflorist.com/images/chocolate.jpg"
+              }
+            ]
+          ],
+          "productPrice": 11
+        }
+      },
+      "createdAt": "2022-04-09T20:23:25.000Z",
+      "updatedAt": "2022-05-25T14:16:05.000Z",
+      "orderId": 1,
+      "vendorId": 3,
+      "product": {
+        "id": 101,
+        "sku_id": "T402-1A",
+        "productId": "P_T402-1A",
+        "name": "Sweet Surrender Bouquet",
+        "url": "https://img.teleflora.com/images/o_0/l_flowers:T402-1A,pg_6/w_272,h_340,cs_no_cmyk,c_pad,g_south/f_auto,q_auto:eco,e_sharpen:200/flowers/T402-1A/Teleflora'sSweetSurrenderBouquet",
+        "price": "59.99",
+        "sku_type": "Standard"
+      },
+      "delivery": {
+        "id": 2,
+        "firstname": "Mahir",
+        "lastname": "Altınkaya",
+        "zipcode": "78451275",
+        "phone": "+905445556699",
+        "email": "mahir_altinkaya@atasoftware.io",
+        "city": "Ankara",
+        "state": "9",
+        "message": "",
+        "note": null,
+        "address1": "Samsun",
+        "address2": "Ordu",
+        "institution": "test kurum",
+        "institution_name": "test kurum adı",
+        "createdAt": "2022-04-09T21:34:03.000Z",
+        "updatedAt": "2022-04-09T21:34:03.000Z",
+        "orderDetailId": 3,
+        "occasionId": null,
+        "occasion": null
+      }
+    },
+    {
+      "id": 4,
+      "productId": 102,
+      "price": "30.00",
+      "order_date": 1649525007,
+      "delivery_date": 1649525007,
+      "delivery_details": 0,
+      "details": { "productDetails": { "tax": 5, "cargo": 7, "addons": [], "productPrice": 100 } },
+      "createdAt": "2022-04-09T20:23:27.000Z",
+      "updatedAt": "2022-04-09T20:23:27.000Z",
+      "orderId": 1,
+      "vendorId": 1,
+      "product": {
+        "id": 102,
+        "sku_id": "TNB13-1A",
+        "productId": "P_TNB13-1A",
+        "name": "Sweet Little Wagon Bouquet",
+        "url": "https://img.teleflora.com/images/o_0/l_flowers:TNB13-1A,pg_6/w_272,h_340,cs_no_cmyk,c_pad,g_south/f_auto,q_auto:eco,e_sharpen:200/flowers/TNB13-1A/Teleflora'sSweetLittleWagonBouquet",
+        "price": "49.99",
+        "sku_type": "Standard"
+      },
+      "delivery": {
+        "id": 3,
+        "firstname": "İbrahim",
+        "lastname": "Uslu",
+        "zipcode": "78451275",
+        "phone": "+905445556699",
+        "email": "ibrahim_uslu@atasoftware.io",
+        "city": "Ankara",
+        "state": "9",
+        "message": "",
+        "note": null,
+        "address1": "Adana",
+        "address2": "Kütahya",
+        "institution": null,
+        "institution_name": null,
+        "createdAt": "2022-04-09T21:34:03.000Z",
+        "updatedAt": "2022-04-09T21:34:03.000Z",
+        "orderDetailId": 4,
+        "occasionId": null,
+        "occasion": null
+      }
+    }
+  ],
+  "order_messages": [
+    {
+      "id": 5,
+      "message": "Merhaba ben samet. 999",
+      "employee": { "id": 2, "lastname": "Admin", "firstname": "Super" },
+      "createdAt": "2022-05-05T17:53:35.000Z",
+      "updatedAt": "2022-05-05T17:53:35.000Z",
+      "orderId": 1
+    },
+    {
+      "id": 4,
+      "message": "Merhaba ben samet. 999",
+      "employee": { "id": 2, "lastname": "Admin", "firstname": "Super" },
+      "createdAt": "2022-05-05T17:43:44.000Z",
+      "updatedAt": "2022-05-05T17:43:44.000Z",
+      "orderId": 1
+    },
+    {
+      "id": 3,
+      "message": "Merhaba ben samet.",
+      "employee": { "id": 2, "lastname": "Admin", "firstname": "Super" },
+      "createdAt": "2022-04-15T16:12:30.000Z",
+      "updatedAt": "2022-04-15T16:12:30.000Z",
+      "orderId": 1
+    },
+    {
+      "id": 2,
+      "message": "Merhaba ben samet.",
+      "employee": { "id": 2, "lastname": "Admin", "firstname": "Super" },
+      "createdAt": "2022-04-15T16:12:28.000Z",
+      "updatedAt": "2022-04-15T16:12:28.000Z",
+      "orderId": 1
+    },
+    {
+      "id": 1,
+      "message": "Merhaba ben samet.",
+      "employee": { "id": 2, "lastname": "Admin", "firstname": "Super" },
+      "createdAt": "2022-04-15T16:12:27.000Z",
+      "updatedAt": "2022-04-15T16:12:27.000Z",
+      "orderId": 1
+    }
+  ],
+  "customer": {
+    "id": 1,
+    "firstname": "Hasan",
+    "lastname": "Polatkan",
+    "email": "hasan.polatkan@gmail.com",
+    "details": {
+      "addressInformation": {
+        "city": "Eskişehir",
+        "state": "Tepebaşı",
+        "zipCode": 55416,
+        "address1": "Ankara",
+        "address2": "Eskişehir"
+      }
+    },
+    "phone": "+905447778899",
+    "status": 1
+  }
+}
