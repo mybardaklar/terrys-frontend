@@ -1,0 +1,41 @@
+.fixedContainer {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 100%;
+  max-width: 768px;
+  height: 100%;
+  background-image: url('/images/bg-4-small.jpg');
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+  padding: 12px 0;
+
+  @media only screen and (max-width: 1599px) {
+    max-width: 50%;
+  }
+
+  @media only screen and (max-width: 959px) {
+    position: static;
+    max-width: none;
+    height: auto;
+  }
+
+  .v-card__title {
+    display: block;
+  }
+
+  &__card {
+    &__actions {
+      padding: 0 16px 16px;
+    }
+
+    &__hours {
+      padding: 0 16px 16px;
+    }
+
+    &__social {
+      padding: 0 16px 16px;
+    }
+  }
+}

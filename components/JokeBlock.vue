@@ -3,16 +3,18 @@ export default {
   data: () => ({
     joke: '',
   }),
-  async mounted() {
-    this.joke = await fetch('/api/joke').then((res) => res.json())
-  },
 }
 </script>
 
 <template>
   <article>
     <blockquote>
-      <p>{{ joke }}</p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ex
+        veritatis, animi deleniti quo, omnis consectetur alias numquam
+        necessitatibus aut facilis a ipsum iusto doloribus, blanditiis impedit
+        sunt? Non, quia?
+      </p>
     </blockquote>
   </article>
 </template>
