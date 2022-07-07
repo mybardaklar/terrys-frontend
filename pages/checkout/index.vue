@@ -1,9 +1,22 @@
 <script>
 import CheckoutCartSummary from '~/components/CheckoutCartSummary/CheckoutCartSummary.vue';
 import CheckoutDiscountCode from '~/components/CheckoutDiscountCode/CheckoutDiscountCode.vue';
+import CheckoutBilling from '~/components/CheckoutBilling/CheckoutBilling.vue';
+import CheckoutRecipients from '~/components/CheckoutRecipients/CheckoutRecipients.vue';
+import CheckoutPayment from '~/components/CheckoutPayment/CheckoutPayment.vue';
+import CheckoutSuccessful from '~/components/CheckoutSuccessful/CheckoutSuccessful.vue';
+import CheckoutFailed from '~/components/CheckoutFailed/CheckoutFailed.vue';
 
 export default {
-  components: { CheckoutCartSummary, CheckoutDiscountCode },
+  components: {
+    CheckoutCartSummary,
+    CheckoutDiscountCode,
+    CheckoutBilling,
+    CheckoutRecipients,
+    CheckoutPayment,
+    CheckoutSuccessful,
+    CheckoutFailed
+  },
   layout: 'withoutFixedContainer'
 };
 </script>
@@ -14,117 +27,65 @@ export default {
       <VImg src="/images/banner-memorial.webp"></VImg>
     </div>
 
-    <div class="mt-8">
-      <VRow>
-        <VCol cols="9">
-          <VCard outlined>
-            <VStepper elevation="0">
-              <VStepperHeader>
-                <VStepperStep
-                  color="green"
-                  step=""
-                  :complete="true"
-                  class="text-body-2 font-weight-bold">
-                  Bill to
-                </VStepperStep>
-                <VDivider></VDivider>
-                <VStepperStep color="green" step="" class="text-body-2"> Recipients </VStepperStep>
-                <VDivider></VDivider>
-                <VStepperStep color="green" step="" class="text-body-2">
-                  Review Order &amp; Payment
-                </VStepperStep>
-              </VStepperHeader>
-            </VStepper>
+    <div v-if="getCheckoutStep !== undefined" class="mt-8">
+      <template v-if="getCheckoutStep === 4">
+        <CheckoutSuccessful />
+      </template>
 
-            <div class="pa-5">
-              <VRow>
-                <VCol cols="6">
-                  <VTextField
-                    color="green"
-                    label="First Name"
-                    hide-details="auto"
-                    dense
-                    outlined></VTextField>
-                </VCol>
-                <VCol cols="6">
-                  <VTextField
-                    color="green"
-                    label="Last Name"
-                    hide-details="auto"
-                    dense
-                    outlined></VTextField>
-                </VCol>
-                <VCol cols="6">
-                  <VTextField
-                    color="green"
-                    label="Zip/Postal Code"
-                    hide-details="auto"
-                    dense
-                    outlined></VTextField>
-                </VCol>
-                <VCol cols="6">
-                  <VTextField
-                    color="green"
-                    label="Phone"
-                    hide-details="auto"
-                    dense
-                    outlined></VTextField>
-                </VCol>
-                <VCol cols="6">
-                  <VSelect
-                    :items="['Foo', 'Bar', 'Fizz', 'Buzz']"
-                    color="green"
-                    label="State/Province"
-                    hide-details="auto"
-                    dense
-                    outlined></VSelect>
-                </VCol>
-                <VCol cols="6">
-                  <VTextField
-                    color="green"
-                    label="City"
-                    hide-details="auto"
-                    dense
-                    outlined></VTextField>
-                </VCol>
-                <VCol cols="6">
-                  <VBtn elevation="0">
-                    <VIcon left>fas fa-circle-xmark</VIcon>
-                    Cancel
-                  </VBtn>
-                </VCol>
-                <VCol cols="6" class="text-right">
-                  <VBtn
-                    color="green"
-                    elevation="0"
-                    dark
-                    @click="$router.push('/checkout/recipients')">
-                    Next
-                    <VIcon right>fas fa-arrow-right</VIcon>
-                  </VBtn>
-                </VCol>
-              </VRow>
-            </div>
-          </VCard>
-        </VCol>
+      <template v-else-if="getCheckoutStep === 5">
+        <CheckoutFailed />
+      </template>
 
-        <VCol cols="3">
-          <CheckoutDiscountCode />
-          <CheckoutCartSummary class="mt-8" />
-        </VCol>
-      </VRow>
+      <template v-else>
+        <VRow>
+          <VCol cols="9">
+            <VCard outlined>
+              <VStepper :value="getCheckoutStep" elevation="0" @change="setCheckoutStep">
+                <VStepperHeader>
+                  <VStepperStep
+                    color="green"
+                    step="1"
+                    :complete="parseInt(getCheckoutStep) > 1"
+                    class="text-body-2 font-weight-bold">
+                    Bill to
+                  </VStepperStep>
+
+                  <VDivider></VDivider>
+
+                  <VStepperStep
+                    color="green"
+                    step="2"
+                    :complete="parseInt(getCheckoutStep) > 2"
+                    class="text-body-2">
+                    Recipients
+                  </VStepperStep>
+
+                  <VDivider></VDivider>
+
+                  <VStepperStep
+                    color="green"
+                    step="3"
+                    :complete="parseInt(getCheckoutStep) > 3"
+                    class="text-body-2">
+                    Review Order &amp; Payment
+                  </VStepperStep>
+                </VStepperHeader>
+              </VStepper>
+
+              <div class="pa-5">
+                <CheckoutBilling v-if="getCheckoutStep === 1" />
+                <CheckoutRecipients v-if="getCheckoutStep === 2" />
+                <CheckoutPayment v-if="getCheckoutStep === 3" />
+              </div>
+            </VCard>
+          </VCol>
+
+          <VCol cols="3">
+            <CheckoutDiscountCode />
+            <CheckoutCartSummary class="mt-8" />
+          </VCol>
+        </VRow>
+      </template>
     </div>
   </VContainer>
 </template>
-
-<style lang="scss" scoped>
-::v-deep .v-stepper__step__step {
-  width: 16px;
-  height: 16px;
-  min-width: 0;
-
-  i {
-    font-size: 10px !important;
-  }
-}
-</style>

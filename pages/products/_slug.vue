@@ -8,6 +8,12 @@ export default {
 
       const selectedAddOnOptions = Array(product.addons.length).fill({});
 
+      const newAddons = product.addons.map((item) => {
+        item.addOnImageUrl = `${item.addOnId}.jpg`;
+        return item;
+      });
+      product.addons = newAddons;
+
       return { product, selectedAddOnOptions };
     }
   },
@@ -60,15 +66,7 @@ export default {
         delivery_date: null,
         delivery_details: null,
         details: {
-          fullfill: {
-            api: '',
-            vendorId: 0,
-            floristId: '',
-            totalPrice: '',
-            floristName: 'çiçekçi samet',
-            floristPhone: '+905445807393',
-            vendorOrderId: 778
-          },
+          fullfill: {},
           productDetails: {
             tax: (30 / 100) * 7,
             cargo: 15,
@@ -86,10 +84,29 @@ export default {
           sku_type: this.product.sku_types.find((sku) => sku.skuId === this.product.sku_id)
             .skuTypeName
         },
-        delivery: {}
+        delivery: {
+          id: null,
+          firstname: '',
+          lastname: '',
+          zipcode: '',
+          phone: '',
+          email: '',
+          city: '',
+          state: '',
+          message: '',
+          note: '',
+          address1: '',
+          address2: '',
+          institution: '',
+          institution_name: '',
+          orderDetailId: null,
+          occasionId: null,
+          occasion: null
+        }
       };
 
       this.setCartItem(newItem);
+      this.setTotalPrice();
       this.setCartDrawerNav(true);
     }
   }
@@ -148,7 +165,7 @@ export default {
               <VCard outlined>
                 <VCardText class="text-center">
                   <VImg
-                    :src="`/images/${addon.addOnId}.jpg`"
+                    :src="`/images/${addon.addOnImageUrl}`"
                     width="80"
                     height="80"
                     class="d-inline-block"

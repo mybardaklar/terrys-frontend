@@ -2,26 +2,26 @@ export default {
   props: {
     link: {
       type: String,
-      required: true,
+      required: true
     },
     img: {
       type: String,
-      required: true,
+      required: true
     },
     title: {
       type: String,
-      required: true,
+      required: true
     },
     price: {
       type: Number,
-      required: true,
+      required: true
     },
     avail: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data: () => ({
-    imgSize: 260,
-  }),
-}
+    imgSize: 260
+  })
+};

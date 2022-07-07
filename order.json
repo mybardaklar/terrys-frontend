@@ -1,0 +1,148 @@
+{
+  "id": null,
+  "order_id": null,
+  "order_tag": "new_order",
+  "order_status": "open",
+  "details": {
+    "total_price": 0,
+    "price": 0,
+    "discount_code": "",
+    "discount_percent": 0,
+    "total_discount_price": 0,
+    "product_count": 0,
+    "tax_rate": 7,
+    "total_tax": 7,
+    "service_fee": 15
+  },
+  "customerId": 27,
+  "bankId": null,
+  "order_details": [
+    {
+      "id": null,
+      "productId": null,
+      "price": "",
+      "order_date": null,
+      "delivery_date": null,
+      "delivery_details": null,
+      "details": {
+        "timezone": {},
+        "fullfill": {
+          "api": "",
+          "vendorId": 0,
+          "floristId": "",
+          "totalPrice": "",
+          "floristName": "çiçekçi samet",
+          "floristPhone": "+905445807393",
+          "vendorOrderId": 778
+        },
+        "productDetails": {
+          "tax": 2.1,
+          "cargo": 15,
+          "addons": [
+            {
+              "addOnId": "AP_PLUSH1",
+              "addOnName": "stuffed animal",
+              "addOnOptions": [{ "id": "PLUSH3", "name": "Large", "price": "$29.99" }],
+              "defaultSelectOption": "Size",
+              "addOnImageUrl": "AP_PLUSH1.jpg"
+            },
+            {
+              "addOnId": "AP_MYLAR1",
+              "addOnName": "mylar balloons",
+              "addOnOptions": [{ "id": "PLUSH3", "name": "Large", "price": "$29.99" }],
+              "defaultSelectOption": "Size",
+              "addOnImageUrl": "AP_MYLAR1.jpg"
+            }
+          ],
+          "productPrice": 114.97
+        }
+      },
+      "product": {
+        "id": 24,
+        "sku_id": "TNB08-1A",
+        "productId": "P_TNB08-1A",
+        "name": "Welcome Little One Bouquet",
+        "url": "https://img.teleflora.com/images/o_0/l_flowers:TNB08-1A,pg_6/w_368,h_460,cs_no_cmyk,c_pad/f_jpg,q_auto:eco,e_sharpen:200/flowers/TNB08-1A/Teleflora'sWelcomeLittleOneBouquet",
+        "price": 54.99,
+        "sku_type": "Standard"
+      },
+      "delivery": {
+        "firstname": "yasar",
+        "lastname": "bardaklar",
+        "email": "myasar@sdfs.com",
+        "note": "234dsadsadfgdgfdgfd",
+        "message": "sdsadasdfgfdg",
+        "city": "zcffsfss",
+        "occasionId": 6,
+        "occasion": "Illness",
+        "state": "asdsdas",
+        "zipcode": "sadas23423",
+        "phone": "342432443423",
+        "address1": "sddsf",
+        "address2": "dsffsd",
+        "institution": "asdadsa",
+        "institution_name": "dasdasdasdasda"
+      }
+    },
+    {
+      "id": null,
+      "productId": null,
+      "price": "",
+      "order_date": null,
+      "delivery_date": null,
+      "delivery_details": null,
+      "details": {
+        "fullfill": {
+          "api": "",
+          "vendorId": null,
+          "floristId": "",
+          "totalPrice": "",
+          "floristName": "",
+          "floristPhone": "",
+          "vendorOrderId": null
+        },
+        "productDetails": {
+          "tax": 2.1,
+          "cargo": 15,
+          "addons": [
+            {
+              "addOnId": "AP_PLUSH1",
+              "addOnName": "stuffed animal",
+              "addOnOptions": [{ "id": "PLUSH1", "name": "Small", "price": "$9.99" }],
+              "defaultSelectOption": "Size",
+              "addOnImageUrl": "AP_PLUSH1.jpg"
+            }
+          ],
+          "productPrice": 84.97999999999999
+        }
+      },
+      "product": {
+        "id": 18,
+        "sku_id": "T81-1C",
+        "productId": "P_T81-1A",
+        "name": "Zen Artistry",
+        "url": "https://img.teleflora.com/images/o_0/l_flowers:T81-1C,pg_6/w_368,h_460,cs_no_cmyk,c_pad/f_jpg,q_auto:eco,e_sharpen:200/flowers/T81-1C/ZenArtistryPM",
+        "price": 74.99,
+        "sku_type": "Premium"
+      },
+      "delivery": {
+        "firstname": "mahir",
+        "lastname": "altinkaya",
+        "email": "myasar@sdfs.com",
+        "note": "234dsadsadfgdgfdgfd",
+        "message": "sdsadasdfgfdg",
+        "city": "zcffsfss",
+        "occasionId": 6,
+        "occasion": "Illness",
+        "state": "asdsdas",
+        "zipcode": "sadas23423",
+        "phone": "342432443423",
+        "address1": "sddsf",
+        "address2": "dsffsd",
+        "institution": "asdadsa",
+        "institution_name": "dasdasdasdasda"
+      }
+    }
+  ],
+  "devId": "943c6664-4112-4f29-9928-7cb8cf550a65"
+}

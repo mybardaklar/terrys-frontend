@@ -1,16 +1,8 @@
 <template>
   <div class="feedback-form">
-    <form
-      netlify
-      netlify-honeypot
-      name="feedback"
-      method="POST"
-      action="/success"
-    >
+    <form netlify netlify-honeypot name="feedback" method="POST" action="/success">
       <p class="hidden">
-        <label>
-          Don’t fill this out if you’re human: <input name="bot-field" />
-        </label>
+        <label> Don’t fill this out if you’re human: <input name="bot-field" /> </label>
       </p>
       <input type="hidden" name="form-name" value="feedback" />
       <label for="name">Name</label>

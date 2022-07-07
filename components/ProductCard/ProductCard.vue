@@ -11,17 +11,13 @@
           :height="imgSize"
           :max-height="imgSize"
           aspect-ratio="1"
-          contain
-        ></VImg>
+          contain></VImg>
       </div>
       <VChip color="primary green" class="productCard__chip" label>
         $<span v-text="price"></span>
       </VChip>
       <div v-show="avail" class="productCard__badge">Avail Today</div>
-      <VCardTitle
-        class="text-subtitle-1 text-center"
-        v-text="title"
-      ></VCardTitle>
+      <VCardTitle class="text-subtitle-1 text-center" v-text="title"></VCardTitle>
     </VCard>
   </NuxtLink>
 </template>
