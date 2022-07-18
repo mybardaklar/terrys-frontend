@@ -28,7 +28,8 @@ export default {
     '~/plugins/mixins.js',
     '~/plugins/axios.js',
     { src: '~/plugins/persistedState.client.js' },
-    { src: '~/plugins/vue-hydration.js', ssr: false }
+    { src: '~/plugins/vue-hydration.js', ssr: false },
+    '~/plugins/vue-mask.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

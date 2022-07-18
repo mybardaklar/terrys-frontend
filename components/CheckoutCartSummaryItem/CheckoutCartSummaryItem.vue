@@ -27,6 +27,13 @@ export default {
       type: Number,
       required: true
     }
+  },
+
+  methods: {
+    deleteItem() {
+      this.deleteCartItem(this.itemIndex);
+      this.setTotalPrice();
+    }
   }
 };
 </script>
@@ -55,7 +62,7 @@ export default {
         </VListItemContent>
       </VCol>
       <VCol cols="3" class="text-right align-self-center">
-        <VBtn icon text large @click="deleteCartItem(itemIndex)">
+        <VBtn icon text large @click="deleteItem()">
           <VIcon size="20">fas fa-times</VIcon>
         </VBtn>
       </VCol>
@@ -72,14 +79,14 @@ export default {
 
     <VRow align="center" class="mt-1" no-gutters>
       <VCol cols="6" class="text-subtitle-2">Your Saving</VCol>
-      <VCol cols="6" class="text-right text-subtitle-1 font-weight-bold">-$749.99</VCol>
+      <VCol cols="6" class="text-right text-subtitle-1 font-weight-bold">-$0</VCol>
     </VRow>
 
     <VRow align="center" class="mt-1" no-gutters>
       <VCol cols="6" class="text-subtitle-2">
         <span>Discount Coupon</span>
       </VCol>
-      <VCol cols="6" class="text-right text-subtitle-1 font-weight-bold">$259.99</VCol>
+      <VCol cols="6" class="text-right text-subtitle-1 font-weight-bold">$0</VCol>
     </VRow>
 
     <VBtn color="green" class="ml-n3" plain text small>Remove</VBtn>

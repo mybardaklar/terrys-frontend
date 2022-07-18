@@ -31,9 +31,7 @@
         </div>
       </VListItemActionText>
 
-      <VBtn color="red darken-1" dark x-small outlined @click="deleteCartItem(itemIndex)">
-        Remove
-      </VBtn>
+      <VBtn color="red darken-1" dark x-small outlined @click="deleteItem()"> Remove </VBtn>
     </VListItemAction>
   </VListItem>
 </template>

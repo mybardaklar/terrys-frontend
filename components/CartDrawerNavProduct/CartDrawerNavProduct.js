@@ -18,5 +18,12 @@ export default {
     },
     extras: {},
     itemIndex: Number
+  },
+
+  methods: {
+    deleteItem() {
+      this.deleteCartItem(this.itemIndex);
+      this.setTotalPrice();
+    }
   }
 };

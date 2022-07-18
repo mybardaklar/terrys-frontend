@@ -1,19 +1,18 @@
 <script>
 export default {
   data: () => ({
-    joke: '',
-  }),
-}
+    joke: ''
+  })
+};
 </script>
 
 <template>
   <article>
     <blockquote>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ex
-        veritatis, animi deleniti quo, omnis consectetur alias numquam
-        necessitatibus aut facilis a ipsum iusto doloribus, blanditiis impedit
-        sunt? Non, quia?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ex veritatis, animi deleniti
+        quo, omnis consectetur alias numquam necessitatibus aut facilis a ipsum iusto doloribus,
+        blanditiis impedit sunt? Non, quia?
       </p>
     </blockquote>
   </article>

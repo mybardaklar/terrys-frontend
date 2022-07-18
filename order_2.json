@@ -1,0 +1,83 @@
+{
+  "id": null,
+  "order_id": null,
+  "order_tag": "new_order",
+  "order_status": "open",
+  "details": {
+    "total_price": 74.727,
+    "price": 64.98,
+    "discount_code": "",
+    "discount_percent": 0,
+    "total_discount_price": 0,
+    "product_count": 0,
+    "tax_rate": 7,
+    "total_tax": 7,
+    "service_fee": 15,
+    "customerTimezone": "Europe/Istanbul"
+  },
+  "customerId": 27,
+  "bankId": null,
+  "order_details": [
+    {
+      "id": null,
+      "productId": null,
+      "price": "",
+      "order_date": null,
+      "delivery_date": "2022-07-15",
+      "delivery_details": null,
+      "details": {
+        "fullfill": {},
+        "productDetails": {
+          "tax": 2.1,
+          "cargo": 15,
+          "addons": [
+            {
+              "addOnId": "AP_CHOC1",
+              "addOnName": "box of chocolates",
+              "addOnOptions": [{ "id": "CHOC2", "name": "Medium box", "price": "$19.99" }],
+              "defaultSelectOption": "Quantity",
+              "addOnImageUrl": "AP_CHOC1.jpg"
+            }
+          ],
+          "productPrice": 64.98
+        },
+        "timezone": {
+          "localDate": "2022-07-07",
+          "isSameDayDelivery": true,
+          "timezone": "America/New_York",
+          "stateshort": "MA",
+          "state": "Massachusetts"
+        }
+      },
+      "product": {
+        "id": 27,
+        "sku_id": "T203-5A-PRM",
+        "productId": "P_T203-5A",
+        "name": "White Tie Boutonniere",
+        "url": "https://terrysflorist.s3.amazonaws.com/images/BF63-11KL.jpg",
+        "price": 44.99,
+        "sku_type": "Premium"
+      },
+      "delivery": {
+        "id": null,
+        "firstname": "Muhammed Yasar",
+        "lastname": "Bardaklar",
+        "zipcode": "01098",
+        "phone": "4444444444",
+        "email": "myasarbardaklar47@gmail.com",
+        "city": "New Jersey",
+        "state": "Massachusetts",
+        "message": "Free card message test",
+        "note": "Note test",
+        "address1": "adasdsadas",
+        "address2": "asdasdasdasdas",
+        "institution": "asdsada",
+        "institution_name": "asdsadsa",
+        "orderDetailId": null,
+        "occasionId": 4,
+        "occasion": "Funeral"
+      }
+    }
+  ],
+  "devId": "28d646cb-78e8-445c-bc27-5d98bc8af58e"
+}

@@ -9,7 +9,12 @@ export const state = () => ({
     type: ''
   },
   apiToken: '',
-  user: {},
+  user: {
+    details: {
+      addressInformation: {}
+    }
+  },
+  checkoutStep: 1,
   cart: {
     id: null,
     order_id: null,
@@ -24,7 +29,8 @@ export const state = () => ({
       product_count: 0,
       tax_rate: 7,
       total_tax: 7,
-      service_fee: 14
+      service_fee: 15,
+      customerTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone
     },
     customerId: null,
     bankId: null,
@@ -68,6 +74,84 @@ export const mutations = {
 
   SET_API_TOKEN(state, value) {
     state.apiToken = value;
+  },
+
+  SET_CHECKOUT_STEP(state, value) {
+    state.checkoutStep = value;
+  },
+
+  SET_CUSTOMER_ID(state, value) {
+    state.cart.customerId = value;
+  },
+
+  SET_USER(state, value) {
+    state.user = value;
+  },
+
+  UPDATE_USER(state, value) {
+    switch (value.key) {
+      case 'city':
+      case 'state':
+      case 'zipcode':
+      case 'address1':
+      case 'address2':
+        state.user.details.addressInformation[value.key] = value.value;
+        break;
+
+      default:
+        state.user[value.key] = value.value;
+        break;
+    }
+  },
+
+  UPDATE_ORDER_DELIVERY(state, value) {
+    state.cart.order_details[value.index].delivery[value.key] = value.value;
+  },
+
+  SET_ALL_DELIVERIES_SAME_ADDRESS(state, value) {
+    const orderDetils = state.cart.order_details.map((item, index) => {
+      if (index !== 0) {
+        item.delivery = value;
+      }
+
+      return item;
+    });
+
+    state.cart.order_details = orderDetils;
+  },
+
+  SET_ORDER_ZIPCODE(state, obj) {
+    state.cart.order_details[obj.index].details.timezone = { ...obj.timezone };
+    state.cart.order_details[obj.index].delivery.state = obj.timezone.state;
+  },
+
+  SET_ORDER_DELIVERY_DATE(state, obj) {
+    state.cart.order_details[obj.index].delivery_date = obj.date;
+  },
+
+  SET_TOTAL_PRICE(state) {
+    // const cartDetails = { ...state.cart.details };
+    let cartSubtotal = 0;
+
+    state.cart.order_details.map((item) => {
+      /* let totalAddonsPrice = 0;
+
+      item.addons.map((item) => {
+        return item;
+      });
+
+      cartDetails.total_price += item.productPrice + totalAddonsPrice; */
+      cartSubtotal += item.details.productDetails.productPrice;
+
+      return item;
+    });
+
+    // calculating subtotal price
+    state.cart.details.price = cartSubtotal;
+
+    // calculating total price
+    state.cart.details.total_price =
+      (cartSubtotal / 100) * state.cart.details.service_fee + cartSubtotal;
   }
 };
 
@@ -106,6 +190,42 @@ export const actions = {
 
   setUserModal({ commit }, newValue) {
     commit('SET_USER_MODAL', newValue);
+  },
+
+  setCheckoutStep({ commit }, newValue) {
+    commit('SET_CHECKOUT_STEP', newValue);
+  },
+
+  setUser({ commit }, newValue) {
+    commit('SET_USER', newValue);
+  },
+
+  updateUser({ commit }, newValue) {
+    commit('UPDATE_USER', newValue);
+  },
+
+  setCustomerId({ commit }, newValue) {
+    commit('SET_CUSTOMER_ID', newValue);
+  },
+
+  updateOrderDelivery({ commit }, newValue) {
+    commit('UPDATE_ORDER_DELIVERY', newValue);
+  },
+
+  setAllDeliveriesSameAddress({ commit }, newValue) {
+    commit('SET_ALL_DELIVERIES_SAME_ADDRESS', newValue);
+  },
+
+  setOrderZipCode({ commit }, newValue) {
+    commit('SET_ORDER_ZIPCODE', newValue);
+  },
+
+  setOrderDeliveryDate({ commit }, newValue) {
+    commit('SET_ORDER_DELIVERY_DATE', newValue);
+  },
+
+  setTotalPrice({ commit }) {
+    commit('SET_TOTAL_PRICE');
   }
 };
 
@@ -122,23 +242,12 @@ export const getters = {
     return state.cart.details;
   },
 
+  getSubtotalPrice(state) {
+    return state.cart.details.price;
+  },
+
   getTotalPrice(state) {
-    const cartDetails = { ...state.cart.details };
-
-    state.cart.order_details.map((item) => {
-      /* let totalAddonsPrice = 0;
-
-      item.addons.map((item) => {
-        return item;
-      });
-
-      cartDetails.total_price += item.productPrice + totalAddonsPrice; */
-      cartDetails.total_price += item.details.productDetails.productPrice;
-
-      return item;
-    });
-
-    return cartDetails.total_price;
+    return state.cart.details.total_price;
   },
 
   getMobileBottomSheet: (state) => {
@@ -151,5 +260,13 @@ export const getters = {
 
   getApiToken: (state) => {
     return state.apiToken;
+  },
+
+  getCheckoutStep: (state) => {
+    return state.checkoutStep;
+  },
+
+  getUser: (state) => {
+    return state.user;
   }
 };
