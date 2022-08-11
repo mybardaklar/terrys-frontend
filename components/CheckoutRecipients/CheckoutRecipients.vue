@@ -1,6 +1,8 @@
 <script>
 export default {
   data: () => ({
+    formValidation: false,
+    googleMapPlaces: null,
     occasions: [
       {
         id: 1,
@@ -123,312 +125,300 @@ export default {
 
 <template>
   <div>
-    <div
-      v-for="(detail, index) in getCartOrderDetails"
-      :key="index"
-      :class="{ 'mt-8': index !== 0 }">
-      <VCard outlined>
-        <VContainer>
-          <VRow>
-            <VCol cols="1">
-              <VImg :src="detail.product.url"></VImg>
-            </VCol>
+    <VForm v-model="formValidation">
+      <div
+        v-for="(detail, index) in getCartOrderDetails"
+        :key="index"
+        :class="{ 'mt-8': index !== 0 }">
+        <VCard outlined>
+          <VContainer>
+            <VRow>
+              <VCol cols="1">
+                <VImg :src="detail.product.url"></VImg>
+              </VCol>
 
-            <VCol cols="7">
-              <div class="text-h6">{{ detail.product.name }}</div>
-              <VListItemSubtitle>{{ detail.product.sku_type }}</VListItemSubtitle>
+              <VCol cols="7">
+                <div class="text-h6">{{ detail.product.name }}</div>
+                <VListItemSubtitle>{{ detail.product.sku_type }}</VListItemSubtitle>
 
-              <div class="mt-1">
-                <p class="mb-0 grey--text text-caption">Item ID: {{ detail.product.productId }}</p>
-              </div>
-
-              <div class="text-caption mt-1" style="line-height: 1.4">
-                <div
-                  v-for="(extra, addOnIndex) in detail.details.productDetails.addons"
-                  :key="addOnIndex">
-                  <span>{{ extra.addOnOptions[0].name }} {{ `(${extra.addOnName})` }}</span>
-                  <strong class="d-block pink--text">
-                    <span>{{ extra.addOnOptions[0].price }}</span>
-                  </strong>
+                <div class="mt-1">
+                  <p class="mb-0 grey--text text-caption">
+                    Item ID: {{ detail.product.productId }}
+                  </p>
                 </div>
-              </div>
 
-              <VCard v-if="detail.delivery_date" class="mt-4" outlined>
-                <VCardText>
-                  <strong>Delivery Date:</strong>
-                  <span>{{ detail.delivery_date }}</span>
-                </VCardText>
-              </VCard>
-            </VCol>
+                <div class="text-caption mt-1" style="line-height: 1.4">
+                  <div
+                    v-for="(extra, addOnIndex) in detail.details.productDetails.addons"
+                    :key="addOnIndex">
+                    <span>{{ extra.addOnOptions[0].name }} {{ `(${extra.addOnName})` }}</span>
+                    <strong class="d-block pink--text">
+                      <span>{{ extra.addOnOptions[0].price }}</span>
+                    </strong>
+                  </div>
+                </div>
 
-            <VCol cols="2" class="text-center" align-self="center">
-              <div class="black--text text-subtitle-2">Price</div>
-              <div class="text-h6 pink--text font-weight-bold">${{ detail.product.price }}</div>
-            </VCol>
+                <VCard v-if="detail.delivery_date" class="mt-4" outlined>
+                  <VCardText>
+                    <strong>Delivery Date:</strong>
+                    <span>{{ detail.delivery_date }}</span>
+                  </VCardText>
+                </VCard>
+              </VCol>
 
-            <VCol cols="2" class="text-center" align-self="center">
-              <div class="black--text text-subtitle-2">Subtotal</div>
-              <div class="text-h6 pink--text font-weight-bold">
-                ${{
-                  (Math.floor(detail.details.productDetails.productPrice * 100) / 100).toFixed(2)
-                }}
-              </div>
-            </VCol>
-          </VRow>
-        </VContainer>
+              <VCol cols="2" class="text-center" align-self="center">
+                <div class="black--text text-subtitle-2">Price</div>
+                <div class="text-h6 pink--text font-weight-bold">${{ detail.product.price }}</div>
+              </VCol>
 
-        <VDialog v-model="dateModalValue" persistent width="100%" max-width="320">
-          <VCard>
-            <VCardTitle>{{ dateModalIndex }}</VCardTitle>
-          </VCard>
-          <VDatePicker
-            :value="getCartOrderDetails[index].delivery_date"
-            color="green"
-            :min="getCurrentDate"
-            :allowed-dates="allowedDates"
-            scrollable
-            @change="(e) => saveDeliveryDate(e)">
-          </VDatePicker>
-        </VDialog>
+              <VCol cols="2" class="text-center" align-self="center">
+                <div class="black--text text-subtitle-2">Subtotal</div>
+                <div class="text-h6 pink--text font-weight-bold">
+                  ${{
+                    (Math.floor(detail.details.productDetails.productPrice * 100) / 100).toFixed(2)
+                  }}
+                </div>
+              </VCol>
+            </VRow>
+          </VContainer>
 
-        <VContainer class="py-8">
-          <VRow>
-            <VCol cols="6">
-              <VTextField
-                :value="detail.delivery.firstname"
-                :rules="nameRules"
-                color="green"
-                label="Recipient's First Name"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => updateOrderDelivery({ index, value: e, key: 'firstname' })
-                "></VTextField>
-            </VCol>
-
-            <VCol cols="6">
-              <VTextField
-                :value="detail.delivery.lastname"
-                :rules="nameRules"
-                color="green"
-                label="Recipient's Last Name"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => updateOrderDelivery({ index, value: e, key: 'lastname' })
-                "></VTextField>
-            </VCol>
-
-            <VCol cols="6">
-              <VTextField
-                :value="detail.delivery.email"
-                :rules="emailRules"
-                color="green"
-                label="Recipient's Email"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => updateOrderDelivery({ index, value: e, key: 'email' })
-                "></VTextField>
-            </VCol>
-
-            <VCol cols="6">
-              <VTextField
-                :value="detail.delivery.phone"
-                :rules="phoneRules"
-                color="green"
-                label="Recipient's Phone"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => updateOrderDelivery({ index, value: e, key: 'phone' })
-                "></VTextField>
-            </VCol>
-
-            <VCol cols="4">
-              <VTextField
-                :value="detail.delivery.zipcode"
-                :rules="numberRules"
-                color="green"
-                label="Zip/Postal Code"
-                hide-details="auto"
-                dense
-                outlined
-                :append-icon="'fas fa-arrow-right'"
-                @click:append="getZipCode(index)"
-                @change="
-                  (e) => {
-                    updateOrderDelivery({ index, value: e, key: 'zipcode' });
-                  }
-                "></VTextField>
-            </VCol>
-
-            <VCol cols="4">
-              <VTextField
-                :value="detail.delivery.state"
-                :rules="textRules"
-                color="green"
-                label="State"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => updateOrderDelivery({ index, value: e, key: 'state' })
-                "></VTextField>
-            </VCol>
-
-            <VCol cols="4">
-              <VTextField
-                :value="detail.delivery.city"
-                :rules="textRules"
-                color="green"
-                label="City"
-                hide-details="auto"
-                dense
-                outlined
-                @change="(e) => updateOrderDelivery({ index, value: e, key: 'city' })"></VTextField>
-            </VCol>
-
-            <VCol cols="6">
-              <VTextField
-                :value="detail.delivery.address1"
-                :rules="textRules"
-                color="green"
-                label="Recipient's Address 1"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => updateOrderDelivery({ index, value: e, key: 'address1' })
-                "></VTextField>
-            </VCol>
-
-            <VCol cols="6">
-              <VTextField
-                :value="detail.delivery.address2"
-                :rules="textRules"
-                color="green"
-                label="Recipient's Address 2"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => updateOrderDelivery({ index, value: e, key: 'address2' })
-                "></VTextField>
-            </VCol>
-
-            <VCol cols="6">
-              <VTextField
-                :value="detail.delivery.institution"
-                :rules="textRules"
-                color="green"
-                label="Institution"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => updateOrderDelivery({ index, value: e, key: 'institution' })
-                "></VTextField>
-            </VCol>
-
-            <VCol cols="6">
-              <VTextField
-                :value="detail.delivery.institution_name"
-                :rules="textRules"
-                color="green"
-                label="Institution Name"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => updateOrderDelivery({ index, value: e, key: 'institution_name' })
-                "></VTextField>
-            </VCol>
-
-            <VCol cols="12">
-              <VSelect
-                :items="occasions"
-                :value="detail.delivery.occasionId"
-                item-text="title"
-                item-value="id"
-                color="green"
-                label="Occasions"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => {
-                    updateOrderDelivery({ index, value: e, key: 'occasionId' });
-                    updateOrderDelivery({
-                      index,
-                      value: occasions.filter((item) => item.id === e)[0].title,
-                      key: 'occasion'
-                    });
-                  }
-                "></VSelect>
-            </VCol>
-
-            <VCol cols="6">
-              <VTextarea
-                :value="detail.delivery.message"
-                color="green"
-                label="Free Card Message"
-                hide-details="auto"
-                dense
-                outlined
-                @change="
-                  (e) => updateOrderDelivery({ index, value: e, key: 'message' })
-                "></VTextarea>
-            </VCol>
-
-            <VCol cols="6">
-              <VTextarea
-                :value="detail.delivery.note"
-                color="green"
-                label="Note"
-                hide-details="auto"
-                dense
-                outlined
-                @change="(e) => updateOrderDelivery({ index, value: e, key: 'note' })"></VTextarea>
-            </VCol>
-          </VRow>
-
-          <div v-if="index === 0" class="mt-8">
-            <VCheckbox
-              :value="useSameAddress"
+          <VDialog v-model="dateModalValue" persistent width="100%" max-width="320">
+            <VDatePicker
+              :value="getCartOrderDetails[index].delivery_date"
               color="green"
-              hide-details="auto"
-              @click="useSameAddressMethod">
-              <template #label>
-                <div class="text-body-2">Use this address for all shipments</div>
-              </template>
-            </VCheckbox>
-          </div>
+              :min="getCurrentDate"
+              :allowed-dates="allowedDates"
+              scrollable
+              @input="(e) => saveDeliveryDate(e)">
+            </VDatePicker>
+          </VDialog>
 
-          <!-- <VBtn color="green" elevation="0" class="mt-8" block dark>
+          <VContainer class="py-8">
+            <VRow>
+              <VCol cols="6">
+                <VTextField
+                  :value="detail.delivery.firstname"
+                  :rules="nameRules"
+                  color="green"
+                  label="Recipient's First Name"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'firstname' })" />
+              </VCol>
+
+              <VCol cols="6">
+                <VTextField
+                  :value="detail.delivery.lastname"
+                  :rules="nameRules"
+                  color="green"
+                  label="Recipient's Last Name"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'lastname' })" />
+              </VCol>
+
+              <VCol cols="6">
+                <VTextField
+                  :value="detail.delivery.email"
+                  :rules="emailRules"
+                  color="green"
+                  label="Recipient's Email"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'email' })" />
+              </VCol>
+
+              <VCol cols="6">
+                <VTextField
+                  v-mask="'###-###-####'"
+                  :value="detail.delivery.phone"
+                  :rules="phoneRules"
+                  color="green"
+                  label="Recipient's Phone"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  return-masked-value
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'phone' })" />
+              </VCol>
+
+              <VCol cols="4">
+                <VTextField
+                  :value="detail.delivery.zipcode"
+                  :rules="numberRules"
+                  color="green"
+                  label="Zip/Postal Code"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  :append-icon="'fas fa-arrow-right'"
+                  @click:append="getZipCode(index)"
+                  @input="
+                    (e) => {
+                      updateOrderDelivery({ index, value: e, key: 'zipcode' });
+                    }
+                  " />
+              </VCol>
+
+              <VCol cols="4">
+                <VTextField
+                  :value="detail.delivery.state"
+                  :rules="textRules"
+                  color="green"
+                  label="State"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'state' })" />
+              </VCol>
+
+              <VCol cols="4">
+                <VTextField
+                  :value="detail.delivery.city"
+                  :rules="textRules"
+                  color="green"
+                  label="City"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'city' })" />
+              </VCol>
+
+              <VCol cols="6">
+                <VAutocomplete
+                  v-model="googleMapPlaces"
+                  color="green"
+                  label="Recipient's Address 1"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  hide-no-data
+                  return-object />
+              </VCol>
+
+              <VCol cols="6">
+                <VTextField
+                  :value="detail.delivery.address2"
+                  color="green"
+                  label="Recipient's Address 2"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'address2' })" />
+              </VCol>
+
+              <VCol cols="6">
+                <VTextField
+                  :value="detail.delivery.institution"
+                  :rules="textRules"
+                  color="green"
+                  label="Institution"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'institution' })" />
+              </VCol>
+
+              <VCol cols="6">
+                <VTextField
+                  :value="detail.delivery.institution_name"
+                  :rules="textRules"
+                  color="green"
+                  label="Institution Name"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="
+                    (e) => updateOrderDelivery({ index, value: e, key: 'institution_name' })
+                  " />
+              </VCol>
+
+              <VCol cols="12">
+                <VSelect
+                  :items="occasions"
+                  :value="detail.delivery.occasionId"
+                  item-text="title"
+                  item-value="id"
+                  color="green"
+                  label="Occasions"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @change="
+                    (e) => {
+                      updateOrderDelivery({ index, value: e, key: 'occasionId' });
+                      // prettier-ignore
+                      updateOrderDelivery({ index, value: occasions.filter((item) => item.id === e)[0].title, key: 'occasion' });
+                    }
+                  " />
+              </VCol>
+
+              <VCol cols="6">
+                <VTextarea
+                  :value="detail.delivery.message"
+                  color="green"
+                  label="Free Card Message"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'message' })" />
+              </VCol>
+
+              <VCol cols="6">
+                <VTextarea
+                  :value="detail.delivery.note"
+                  color="green"
+                  label="Note"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'note' })" />
+              </VCol>
+            </VRow>
+
+            <template v-if="getCartOrderDetails.length > 1">
+              <div v-if="index === 0" class="mt-8">
+                <VCheckbox
+                  :value="useSameAddress"
+                  color="green"
+                  hide-details="auto"
+                  @click="useSameAddressMethod">
+                  <template #label>
+                    <div class="text-body-2">Use this address for all shipments</div>
+                  </template>
+                </VCheckbox>
+              </div>
+            </template>
+
+            <!-- <VBtn color="green" elevation="0" class="mt-8" block dark>
             Save Address To Continue
           </VBtn> -->
-        </VContainer>
-      </VCard>
-    </div>
+          </VContainer>
+        </VCard>
+      </div>
 
-    <VRow class="mt-8">
-      <VCol cols="6">
-        <VBtn elevation="0" @click="setCheckoutStep(1)">
-          <VIcon left>fas fa-arrow-left</VIcon>
-          Prev
-        </VBtn>
-      </VCol>
-      <VCol cols="6" class="text-right">
-        <VBtn color="green" elevation="0" dark @click="setCheckoutStep(3)">
-          Next
-          <VIcon right>fas fa-arrow-right</VIcon>
-        </VBtn>
-      </VCol>
-    </VRow>
+      <VRow class="mt-8">
+        <VCol cols="6">
+          <VBtn elevation="0" @click="setCheckoutStep(1)">
+            <VIcon left>fas fa-arrow-left</VIcon>
+            Prev
+          </VBtn>
+        </VCol>
+        <VCol cols="6" class="text-right">
+          <VBtn
+            color="green"
+            elevation="0"
+            :dark="formValidation"
+            :disabled="!formValidation"
+            @click="setCheckoutStep(3)">
+            Next
+            <VIcon right>fas fa-arrow-right</VIcon>
+          </VBtn>
+        </VCol>
+      </VRow>
+    </VForm>
   </div>
 </template>

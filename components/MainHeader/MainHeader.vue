@@ -42,7 +42,33 @@
         <span>Shopping Cart</span>
       </VTooltip>
 
-      <VMenu transition="slide-y-transition" bottom offset-y>
+      <VMenu v-if="getUser.accessToken" transition="slide-y-transition" bottom offset-y>
+        <template #activator="{ on: menuOn, attrs: menuAttrs }">
+          <VTooltip bottom>
+            <template #activator="{ on: tooltipOn }">
+              <VAvatar color="green" size="48">
+                <VIcon v-bind="menuAttrs" v-on="{ ...menuOn, ...tooltipOn }" dark>
+                  fas fa-user
+                </VIcon>
+              </VAvatar>
+            </template>
+            <span>User Profile</span>
+          </VTooltip>
+        </template>
+
+        <VList width="200" dense>
+          <VListItem @click="signOutMethod">
+            <VListItemIcon class="mr-2">
+              <VIcon size="16">fas fa-arrow-right-to-bracket</VIcon>
+            </VListItemIcon>
+            <VListItemContent>
+              <VListItemTitle>Sign out</VListItemTitle>
+            </VListItemContent>
+          </VListItem>
+        </VList>
+      </VMenu>
+
+      <VMenu v-else transition="slide-y-transition" bottom offset-y>
         <template #activator="{ on: menuOn, attrs: menuAttrs }">
           <VTooltip bottom>
             <template #activator="{ on: tooltipOn }">

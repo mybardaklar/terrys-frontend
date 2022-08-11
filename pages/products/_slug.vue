@@ -61,7 +61,7 @@ export default {
       const newItem = {
         id: null,
         productId: null,
-        price: '',
+        price: this.productPrice,
         order_date: null,
         delivery_date: null,
         delivery_details: null,

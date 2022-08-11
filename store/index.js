@@ -72,6 +72,10 @@ export const mutations = {
     state.cart.details = cartDetails;
   },
 
+  SET_CART_CUSTOMER(state, value) {
+    state.cart.customerId = value;
+  },
+
   SET_API_TOKEN(state, value) {
     state.apiToken = value;
   },
@@ -85,7 +89,12 @@ export const mutations = {
   },
 
   SET_USER(state, value) {
-    state.user = value;
+    Object.assign(state.user, value);
+  },
+
+  SIGN_OUT_USER(state, value) {
+    delete state.user.accessToken;
+    delete state.user.customer;
   },
 
   UPDATE_USER(state, value) {
@@ -188,6 +197,10 @@ export const actions = {
     commit('SET_CART_DETAIL', newValue);
   },
 
+  setCartCustomer({ commit }, newValue) {
+    commit('SET_CART_CUSTOMER', newValue);
+  },
+
   setUserModal({ commit }, newValue) {
     commit('SET_USER_MODAL', newValue);
   },
@@ -198,6 +211,10 @@ export const actions = {
 
   setUser({ commit }, newValue) {
     commit('SET_USER', newValue);
+  },
+
+  signOutUser({ commit }) {
+    commit('SIGN_OUT_USER');
   },
 
   updateUser({ commit }, newValue) {
@@ -240,6 +257,10 @@ export const getters = {
 
   getCartDetails(state) {
     return state.cart.details;
+  },
+
+  getCartCustomer(state) {
+    return state.cart.customerId;
   },
 
   getSubtotalPrice(state) {

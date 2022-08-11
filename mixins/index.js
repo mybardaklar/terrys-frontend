@@ -21,16 +21,16 @@ const mixin = {
       (v) => v.length >= 5 || 'Name at least to be 5 characters.'
     ],
     emailRules: [
-      (v) => !!v || 'Lütfen geçerli bir email giriniz.',
+      (v) => !!v || 'Please enter a valid email.',
       (v) =>
         /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(v) ||
         'Please use a valid email address.'
     ],
     passwordRules: [
-      (v) => !!v || 'Parola alanı gereklidir.',
+      (v) => !!v || 'Password field is required.',
       (v) =>
         (v && v.length >= 8 && v.length <= 16) ||
-        'Şifre uzunluğu en az 8 en fazla 16 karakter olmalıdır'
+        'Password length must be at least 8 characters and at most 16 characters.'
     ],
     textRules: [
       (v) => !!v || 'Field is required.',
@@ -59,6 +59,7 @@ const mixin = {
       'getCartDrawerNav',
       'getCartOrderDetails',
       'getCartDetails',
+      'getCartCustomer',
       'getMobileBottomSheet',
       'getUserModal',
       'getSubtotalPrice',
@@ -76,8 +77,10 @@ const mixin = {
       'setCartItem',
       'deleteCartItem',
       'setCartDetail',
+      'setCartCustomer',
       'setCheckoutStep',
       'setUser',
+      'signOutUser',
       'updateUser',
       'setCustomerId',
       'updateOrderDelivery',
