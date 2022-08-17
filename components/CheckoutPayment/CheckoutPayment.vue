@@ -250,8 +250,8 @@ export default {
               </VCol>
               <VCol cols="6">
                 <VTextField
-                  v-mask="'#### #### #### ####'"
                   v-model="creditCardNumber"
+                  v-mask="'#### #### #### ####'"
                   color="green"
                   label="Card Number"
                   hide-details="auto"
@@ -261,8 +261,8 @@ export default {
               </VCol>
               <VCol cols="6">
                 <VTextField
-                  v-mask="'## / ####'"
                   v-model="creditCardExpireDate"
+                  v-mask="'## / ####'"
                   color="green"
                   label="Expiration Date"
                   hide-details="auto"
@@ -272,8 +272,8 @@ export default {
               </VCol>
               <VCol cols="6">
                 <VTextField
-                  v-mask="'###'"
                   v-model="creditCardCvc"
+                  v-mask="'###'"
                   color="green"
                   label="Card Security Code"
                   hide-details="auto"

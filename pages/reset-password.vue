@@ -24,17 +24,14 @@ export default {
       try {
         const fCode = this.$route.query.fCode;
 
+        /* eslint-disable */
         const request = await this.$axios.$post('/auth/cResetPassword', {
           fCode,
           password: this.passwordInput.trim()
         });
 
-        console.log(request);
-
         window.location.replace('/?signInModal=true');
       } catch (error) {
-        console.log(error);
-
         if (error.response.data.responseStatus) {
           this.alertStatus = true;
           this.alertType = 'error';

@@ -33,8 +33,6 @@ export default {
           password: this.signupInputPassword.trim()
         });
 
-        console.log(request);
-
         if (request.response && request.response.data.responseStatus) {
           this.alertStatus = true;
           this.alertType = 'error';
@@ -45,8 +43,6 @@ export default {
           this.alertMessage = 'Successfuly signed up!';
         }
       } catch (error) {
-        console.log(error);
-
         if (error.response.data.responseStatus) {
           this.alertStatus = true;
           this.alertType = 'error';
@@ -63,8 +59,6 @@ export default {
           password: this.signinInputPassword.trim()
         });
 
-        console.log(request);
-
         if (request.accessToken) {
           this.setUser(request);
           this.setUserModal({ active: false });
@@ -72,8 +66,6 @@ export default {
           window.location.replace('/');
         }
       } catch (error) {
-        console.log(error);
-
         if (error.response.data.responseStatus) {
           this.alertStatus = true;
           this.alertType = 'error';
@@ -85,20 +77,17 @@ export default {
     // forgot password method
     async forgotPasswordMethod() {
       try {
+        /* eslint-disable */
         const request = await this.$axios.$post('/auth/cForgotPassword', null, {
           params: {
             email: this.forgotPasswordInputEmail.trim()
           }
         });
 
-        console.log(request);
-
         this.alertStatus = true;
         this.alertType = 'success';
         this.alertMessage = 'Recovery email successfuly sent.';
       } catch (error) {
-        console.log(error);
-
         if (error.response.data.responseStatus) {
           this.alertStatus = true;
           this.alertType = 'error';

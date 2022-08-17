@@ -47,7 +47,7 @@
           <VTooltip bottom>
             <template #activator="{ on: tooltipOn }">
               <VAvatar color="green" size="48">
-                <VIcon v-bind="menuAttrs" v-on="{ ...menuOn, ...tooltipOn }" dark>
+                <VIcon v-bind="menuAttrs" dark v-on="{ ...menuOn, ...tooltipOn }">
                   fas fa-user
                 </VIcon>
               </VAvatar>
