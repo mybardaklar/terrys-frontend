@@ -1,10 +1,12 @@
 <script>
 export default {
-  data: () => ({}),
+  data: () => ({
+    formValidation: false
+  }),
 
   methods: {
     async nextStep() {
-      if (this.$refs.billingForm.validate()) {
+      if (this.formValidation) {
         const customer = await this.$axios.$put('/api/customers', this.getUser);
 
         if (customer) {
@@ -19,7 +21,7 @@ export default {
 </script>
 
 <template>
-  <VForm ref="billingForm">
+  <VForm v-model="formValidation">
     <VRow>
       <VCol cols="6">
         <VTextField
@@ -30,7 +32,7 @@ export default {
           hide-details="auto"
           dense
           outlined
-          @change="
+          @input="
             (e) => {
               updateUser({ value: e, key: 'firstname' });
             }
@@ -46,7 +48,7 @@ export default {
           hide-details="auto"
           dense
           outlined
-          @change="
+          @input="
             (e) => {
               updateUser({ value: e, key: 'lastname' });
             }
@@ -63,7 +65,8 @@ export default {
           hide-details="auto"
           dense
           outlined
-          @change="
+          return-masked-value
+          @input="
             (e) => {
               updateUser({ value: e, key: 'phone' });
             }
@@ -79,7 +82,7 @@ export default {
           hide-details="auto"
           dense
           outlined
-          @change="
+          @input="
             (e) => {
               updateUser({ value: e, key: 'email' });
             }
@@ -95,7 +98,7 @@ export default {
           hide-details="auto"
           dense
           outlined
-          @change="
+          @input="
             (e) => {
               updateUser({ value: e, key: 'address1' });
             }
@@ -105,13 +108,12 @@ export default {
       <VCol cols="6">
         <VTextField
           :value="getUser.details.addressInformation.address2"
-          :rules="textRules"
           color="green"
           label="Address 2"
           hide-details="auto"
           dense
           outlined
-          @change="
+          @input="
             (e) => {
               updateUser({ value: e, key: 'address2' });
             }
@@ -127,7 +129,7 @@ export default {
           hide-details="auto"
           dense
           outlined
-          @change="
+          @input="
             (e) => {
               updateUser({ value: e, key: 'city' });
             }
@@ -143,7 +145,7 @@ export default {
           hide-details="auto"
           dense
           outlined
-          @change="
+          @input="
             (e) => {
               updateUser({ value: e, key: 'state' });
             }
@@ -159,7 +161,7 @@ export default {
           hide-details="auto"
           dense
           outlined
-          @change="
+          @input="
             (e) => {
               updateUser({ value: e, key: 'zipcode' });
             }
@@ -173,7 +175,12 @@ export default {
         </VBtn>
       </VCol>
       <VCol cols="6" class="text-right">
-        <VBtn color="green" elevation="0" dark @click="nextStep()">
+        <VBtn
+          color="green"
+          elevation="0"
+          :dark="formValidation"
+          :disabled="!formValidation"
+          @click="nextStep()">
           Next
           <VIcon right>fas fa-arrow-right</VIcon>
         </VBtn>
@@ -181,3 +188,5 @@ export default {
     </VRow>
   </VForm>
 </template>
+
+<style lang="scss" scoped></style>

@@ -1,7 +1,11 @@
 <script>
 export default {
   data: () => ({
-    paymentMethod: 'creditCard'
+    paymentMethod: 'creditCard',
+    creditCardHolder: null,
+    creditCardNumber: null,
+    creditCardExpireDate: null,
+    creditCardCvc: null
   })
 };
 </script>
@@ -12,62 +16,147 @@ export default {
     <VRow>
       <VCol cols="6">
         <VTextField
+          :value="getUser.firstname"
+          :rules="textRules"
           color="green"
           label="First Name"
           hide-details="auto"
           dense
-          outlined></VTextField>
+          outlined
+          @input="
+            (e) => {
+              updateUser({ value: e, key: 'firstname' });
+            }
+          " />
       </VCol>
-      <VCol cols="6">
-        <VTextField color="green" label="Last Name" hide-details="auto" dense outlined></VTextField>
-      </VCol>
-      <VCol cols="12">
-        <VTextField
-          color="green"
-          label="Email Address"
-          type="email"
-          hide-details="auto"
-          dense
-          outlined></VTextField>
-      </VCol>
-      <VCol cols="12">
-        <VTextField
-          color="green"
-          label="Street Address"
-          hide-details="auto"
-          dense
-          outlined></VTextField>
-      </VCol>
-      <VCol cols="12">
-        <VTextField
-          color="green"
-          label="Street Address 2"
-          hide-details="auto"
-          dense
-          outlined></VTextField>
-      </VCol>
-      <VCol cols="6">
-        <VSelect
-          :items="['Foo', 'Bar', 'Fizz', 'Buzz']"
-          color="green"
-          label="State/Province"
-          hide-details="auto"
-          dense
-          outlined></VSelect>
-      </VCol>
-      <VCol cols="6">
-        <VTextField color="green" label="City" hide-details="auto" dense outlined></VTextField>
-      </VCol>
+
       <VCol cols="6">
         <VTextField
+          :value="getUser.lastname"
+          :rules="textRules"
           color="green"
-          label="Zip/Postal Code"
+          label="Last Name"
           hide-details="auto"
           dense
-          outlined></VTextField>
+          outlined
+          @input="
+            (e) => {
+              updateUser({ value: e, key: 'lastname' });
+            }
+          " />
       </VCol>
+
       <VCol cols="6">
-        <VTextField color="green" label="Phone" hide-details="auto" dense outlined></VTextField>
+        <VTextField
+          v-mask="'###-###-####'"
+          :value="getUser.phone"
+          :rules="phoneRules"
+          color="green"
+          label="Phone"
+          hide-details="auto"
+          dense
+          outlined
+          return-masked-value
+          @input="
+            (e) => {
+              updateUser({ value: e, key: 'phone' });
+            }
+          " />
+      </VCol>
+
+      <VCol cols="6">
+        <VTextField
+          :value="getUser.email"
+          :rules="emailRules"
+          color="green"
+          label="Email"
+          hide-details="auto"
+          dense
+          outlined
+          @input="
+            (e) => {
+              updateUser({ value: e, key: 'email' });
+            }
+          "></VTextField>
+      </VCol>
+
+      <VCol cols="6">
+        <VTextField
+          :value="getUser.details.addressInformation.address1"
+          :rules="textRules"
+          color="green"
+          label="Address 1"
+          hide-details="auto"
+          dense
+          outlined
+          @input="
+            (e) => {
+              updateUser({ value: e, key: 'address1' });
+            }
+          " />
+      </VCol>
+
+      <VCol cols="6">
+        <VTextField
+          :value="getUser.details.addressInformation.address2"
+          color="green"
+          label="Address 2"
+          hide-details="auto"
+          dense
+          outlined
+          @input="
+            (e) => {
+              updateUser({ value: e, key: 'address2' });
+            }
+          " />
+      </VCol>
+
+      <VCol cols="4">
+        <VTextField
+          :value="getUser.details.addressInformation.city"
+          :rules="textRules"
+          color="green"
+          label="City"
+          hide-details="auto"
+          dense
+          outlined
+          @input="
+            (e) => {
+              updateUser({ value: e, key: 'city' });
+            }
+          " />
+      </VCol>
+
+      <VCol cols="4">
+        <VTextField
+          :value="getUser.details.addressInformation.state"
+          :rules="textRules"
+          color="green"
+          label="State"
+          hide-details="auto"
+          dense
+          outlined
+          @input="
+            (e) => {
+              updateUser({ value: e, key: 'state' });
+            }
+          " />
+      </VCol>
+
+      <VCol cols="4">
+        <VTextField
+          :value="getUser.details.addressInformation.zipcode"
+          :rules="textRules"
+          color="green"
+          label="Zip"
+          hide-details="auto"
+          dense
+          outlined
+          @input="
+            (e) => {
+              updateUser({ value: e, key: 'zipcode' });
+            }
+          " />
       </VCol>
     </VRow>
 
@@ -150,29 +239,47 @@ export default {
 
           <div v-show="paymentMethod === 'creditCard' ? true : false" class="mt-4">
             <VRow>
-              <VCol cols="12">
+              <VCol cols="6">
                 <VTextField
+                  v-model="creditCardHolder"
                   color="green"
-                  label="Card Mumber"
+                  label="Card Holder Fullname"
                   hide-details="auto"
                   dense
-                  outlined></VTextField>
+                  outlined />
               </VCol>
               <VCol cols="6">
                 <VTextField
+                  v-model="creditCardNumber"
+                  v-mask="'#### #### #### ####'"
+                  color="green"
+                  label="Card Number"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  return-masked-value />
+              </VCol>
+              <VCol cols="6">
+                <VTextField
+                  v-model="creditCardExpireDate"
+                  v-mask="'## / ####'"
                   color="green"
                   label="Expiration Date"
                   hide-details="auto"
                   dense
-                  outlined></VTextField>
+                  outlined
+                  return-masked-value />
               </VCol>
               <VCol cols="6">
                 <VTextField
+                  v-model="creditCardCvc"
+                  v-mask="'###'"
                   color="green"
                   label="Card Security Code"
                   hide-details="auto"
                   dense
-                  outlined></VTextField>
+                  outlined
+                  return-masked-value />
               </VCol>
             </VRow>
           </div>
@@ -182,7 +289,7 @@ export default {
 
     <VRow class="mt-8">
       <VCol cols="6">
-        <VBtn elevation="0" @click="setCheckoutStep(1)">
+        <VBtn elevation="0" @click="setCheckoutStep(2)">
           <VIcon left>fas fa-arrow-left</VIcon>
           Prev
         </VBtn>

@@ -1,0 +1,83 @@
+{
+  "id": null,
+  "order_id": null,
+  "order_tag": "new_order",
+  "order_status": "open",
+  "details": {
+    "total_price": 87.37700000000001,
+    "price": 75.98,
+    "discount_code": "",
+    "discount_percent": 0,
+    "total_discount_price": 0,
+    "product_count": 0,
+    "tax_rate": 7,
+    "total_tax": 7,
+    "service_fee": 15,
+    "customerTimezone": "Europe/Istanbul"
+  },
+  "customerId": 27,
+  "bankId": null,
+  "order_details": [
+    {
+      "id": null,
+      "productId": null,
+      "price": 75.98,
+      "order_date": null,
+      "delivery_date": "2022-07-13",
+      "delivery_details": null,
+      "details": {
+        "fullfill": {},
+        "productDetails": {
+          "tax": 2.1,
+          "cargo": 15,
+          "addons": [
+            {
+              "addOnId": "AP_MYLAR1",
+              "addOnName": "mylar balloons",
+              "addOnOptions": [{ "id": "MYLAR3", "name": "3 Balloons", "price": "$15.99" }],
+              "defaultSelectOption": "Size",
+              "addOnImageUrl": "AP_MYLAR1.jpg"
+            }
+          ],
+          "productPrice": 75.98
+        },
+        "timezone": {
+          "localDate": "2022-07-07",
+          "isSameDayDelivery": true,
+          "timezone": "America/New_York",
+          "stateshort": "MA",
+          "state": "Massachusetts"
+        }
+      },
+      "product": {
+        "id": 26,
+        "sku_id": "TNB12-1B",
+        "productId": "P_TNB12-1A",
+        "name": "Welcome Beautiful Bouquet",
+        "url": "https://img.teleflora.com/images/o_0/l_flowers:TNB12-1B,pg_6/w_368,h_460,cs_no_cmyk,c_pad/f_jpg,q_auto:eco,e_sharpen:200/flowers/TNB12-1B/Teleflora'sWelcomeBeautifulBouquetDX",
+        "price": 59.99,
+        "sku_type": "Deluxe (As Shown)"
+      },
+      "delivery": {
+        "id": null,
+        "firstname": "Muhammed Yasar",
+        "lastname": "Bardaklar",
+        "zipcode": "01098",
+        "phone": "3333333333",
+        "email": "myasar@gmail.com",
+        "city": "New York",
+        "state": "Massachusetts",
+        "message": "Free card message test",
+        "note": "Note test",
+        "address1": "weeeqw",
+        "address2": "qeqeqweqwewq",
+        "institution": "qweqeqw",
+        "institution_name": "qeqeeq",
+        "orderDetailId": null,
+        "occasionId": 3,
+        "occasion": "Business"
+      }
+    }
+  ],
+  "devId": "28d646cb-78e8-445c-bc27-5d98bc8af58e"
+}
