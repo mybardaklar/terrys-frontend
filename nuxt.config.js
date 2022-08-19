@@ -17,7 +17,12 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      {
+        src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAE-PU-PMtd1h8FbQMVhZZw6hYWBHgJknI&libraries=places'
+      }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
