@@ -1,10 +1,54 @@
 <script>
 export default {
   data: () => ({
-    formValidation: false
+    formValidation: false,
+    autocomplete: null
   }),
-
+  mounted() {},
   methods: {
+    findMap() {
+      // eslint-disable-next-line
+
+      const input = document.getElementById('searchTextField');
+      const options = {
+        componenRestrictions: {
+          country: 'us'
+        },
+        fields: ['address_components'],
+        types: ['address']
+      };
+      // eslint-disable-next-line
+      this.autocomplete = new google.maps.places.Autocomplete(input, options);
+
+      this.autocomplete.addListener('place_changed', () => {
+        const place = this.autocomplete.getPlace();
+
+        for (let index = 0; index < place.address_components.length; index++) {
+          const local = place.address_components[index];
+
+          switch (local.types[0]) {
+            case 'street_number':
+              this.updateUser({ value: local.long_name, key: 'address1' });
+              break;
+            case 'postal_code':
+              this.updateUser({ value: local.long_name, key: 'zipcode' });
+              break;
+
+            case 'administrative_area_level_1':
+              this.updateUser({ value: local.short_name, key: 'state' });
+              break;
+
+            case 'administrative_area_level_2':
+              this.updateUser({ value: local.long_name, key: 'city' });
+              break;
+
+            default:
+              break;
+          }
+        }
+      });
+    },
+
     async nextStep() {
       if (this.formValidation) {
         const customer = await this.$axios.$put('/api/customers', this.getUser);
@@ -91,6 +135,7 @@ export default {
 
       <VCol sm="6" cols="12">
         <VTextField
+          id="searchTextField"
           :value="getUser.details.addressInformation.address1"
           :rules="textRules"
           color="green"
@@ -98,6 +143,7 @@ export default {
           hide-details="auto"
           dense
           outlined
+          @keydown="findMap"
           @input="
             (e) => {
               updateUser({ value: e, key: 'address1' });
