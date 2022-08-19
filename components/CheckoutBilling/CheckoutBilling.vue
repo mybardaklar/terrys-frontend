@@ -23,7 +23,7 @@ export default {
 <template>
   <VForm v-model="formValidation">
     <VRow>
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           :value="getUser.firstname"
           :rules="textRules"
@@ -39,7 +39,7 @@ export default {
           "></VTextField>
       </VCol>
 
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           :value="getUser.lastname"
           :rules="textRules"
@@ -55,7 +55,7 @@ export default {
           "></VTextField>
       </VCol>
 
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           v-mask="'###-###-####'"
           :value="getUser.phone"
@@ -73,7 +73,7 @@ export default {
           "></VTextField>
       </VCol>
 
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           :value="getUser.email"
           :rules="emailRules"
@@ -89,7 +89,7 @@ export default {
           "></VTextField>
       </VCol>
 
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           :value="getUser.details.addressInformation.address1"
           :rules="textRules"
@@ -105,7 +105,7 @@ export default {
           "></VTextField>
       </VCol>
 
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           :value="getUser.details.addressInformation.address2"
           color="green"
@@ -120,7 +120,7 @@ export default {
           "></VTextField>
       </VCol>
 
-      <VCol cols="4">
+      <VCol md="4" cols="12">
         <VTextField
           :value="getUser.details.addressInformation.city"
           :rules="textRules"
@@ -136,7 +136,7 @@ export default {
           "></VTextField>
       </VCol>
 
-      <VCol cols="4">
+      <VCol md="4" cols="12">
         <VTextField
           :value="getUser.details.addressInformation.state"
           :rules="textRules"
@@ -152,7 +152,7 @@ export default {
           "></VTextField>
       </VCol>
 
-      <VCol cols="4">
+      <VCol md="4" cols="12">
         <VTextField
           :value="getUser.details.addressInformation.zipcode"
           :rules="textRules"
