@@ -14,7 +14,7 @@ export default {
   <div>
     <div class="text-h6 font-weight-bold mb-4">Billing Address</div>
     <VRow>
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           :value="getUser.firstname"
           :rules="textRules"
@@ -30,7 +30,7 @@ export default {
           " />
       </VCol>
 
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           :value="getUser.lastname"
           :rules="textRules"
@@ -46,7 +46,7 @@ export default {
           " />
       </VCol>
 
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           v-mask="'###-###-####'"
           :value="getUser.phone"
@@ -64,7 +64,7 @@ export default {
           " />
       </VCol>
 
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           :value="getUser.email"
           :rules="emailRules"
@@ -80,7 +80,7 @@ export default {
           "></VTextField>
       </VCol>
 
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           :value="getUser.details.addressInformation.address1"
           :rules="textRules"
@@ -96,7 +96,7 @@ export default {
           " />
       </VCol>
 
-      <VCol cols="6">
+      <VCol sm="6" cols="12">
         <VTextField
           :value="getUser.details.addressInformation.address2"
           color="green"
@@ -111,7 +111,7 @@ export default {
           " />
       </VCol>
 
-      <VCol cols="4">
+      <VCol md="4" cols="12">
         <VTextField
           :value="getUser.details.addressInformation.city"
           :rules="textRules"
@@ -127,7 +127,7 @@ export default {
           " />
       </VCol>
 
-      <VCol cols="4">
+      <VCol md="4" cols="12">
         <VTextField
           :value="getUser.details.addressInformation.state"
           :rules="textRules"
@@ -143,7 +143,7 @@ export default {
           " />
       </VCol>
 
-      <VCol cols="4">
+      <VCol md="4" cols="12">
         <VTextField
           :value="getUser.details.addressInformation.zipcode"
           :rules="textRules"
@@ -169,8 +169,8 @@ export default {
         outlined
         @click="paymentMethod = 'paypal'">
         <VCardText>
-          <div class="d-flex align-center justify-space-between">
-            <div class="d-flex align-center">
+          <div class="d-sm-flex align-center justify-space-between">
+            <div class="d-sm-flex align-center">
               <div>
                 <VRadio value="paypal">
                   <template #label>
@@ -178,7 +178,8 @@ export default {
                   </template>
                 </VRadio>
               </div>
-              <div class="grey--text ml-4">
+
+              <div class="grey--text ml-sm-4 mt-sm-0 mt-4">
                 You will be redirected to the PayPal website after submitting your order
               </div>
             </div>
@@ -201,7 +202,7 @@ export default {
         @click="paymentMethod = 'creditCard'">
         <VCardText>
           <div>
-            <div class="d-flex align-center justify-space-between">
+            <div class="d-sm-flex align-center justify-space-between">
               <div class="d-flex align-center">
                 <div>
                   <VRadio color="green" value="creditCard">
@@ -212,7 +213,7 @@ export default {
                 </div>
               </div>
 
-              <div class="d-flex align-center">
+              <div class="d-flex flex-wrap align-center my-sm-0 my-4">
                 <VCard class="mr-1" outlined>
                   <VCardText class="pa-2">
                     <VImg src="/images/visa.png" width="60" height="15"></VImg>
@@ -239,16 +240,16 @@ export default {
 
           <div v-show="paymentMethod === 'creditCard' ? true : false" class="mt-4">
             <VRow>
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   v-model="creditCardHolder"
                   color="green"
-                  label="Card Holder Fullname"
+                  label="Card Holder"
                   hide-details="auto"
                   dense
                   outlined />
               </VCol>
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   v-model="creditCardNumber"
                   v-mask="'#### #### #### ####'"
@@ -259,7 +260,7 @@ export default {
                   outlined
                   return-masked-value />
               </VCol>
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   v-model="creditCardExpireDate"
                   v-mask="'## / ####'"
@@ -270,7 +271,7 @@ export default {
                   outlined
                   return-masked-value />
               </VCol>
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   v-model="creditCardCvc"
                   v-mask="'###'"
