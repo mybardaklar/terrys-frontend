@@ -38,7 +38,7 @@ export default {
 
       <template v-else>
         <VRow>
-          <VCol cols="9">
+          <VCol xl="9" lg="8" cols="12">
             <VCard outlined>
               <VStepper :value="getCheckoutStep" elevation="0" @change="setCheckoutStep">
                 <VStepperHeader>
@@ -80,7 +80,7 @@ export default {
             </VCard>
           </VCol>
 
-          <VCol cols="3">
+          <VCol xl="3" lg="4" cols="12">
             <CheckoutDiscountCode />
             <CheckoutCartSummary class="mt-8" />
           </VCol>

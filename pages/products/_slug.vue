@@ -116,13 +116,13 @@ export default {
 <template>
   <div>
     <VRow>
-      <VCol cols="3">
+      <VCol lg="3" sm="5" cols="12">
         <VCard outlined>
           <VImg :src="product.sku_types.find((sku) => sku.skuId === product.sku_id).image"></VImg>
         </VCard>
       </VCol>
 
-      <VCol cols="9">
+      <VCol lg="9" sm="7" cols="12">
         <h6 class="text-overline font-weight-medium text--disabled">
           <span v-text="product.tf_id"></span>
           <VTooltip right>
@@ -138,7 +138,7 @@ export default {
           <div class="text-subtitle-1 font-weight-bold mb-2">Upgrade your bouquet</div>
           <VRadioGroup v-model="product.sku_id" hide-details="auto" class="my-0" row>
             <VRow>
-              <VCol v-for="sku in product.sku_types" :key="sku.skuId" cols="3">
+              <VCol v-for="sku in product.sku_types" :key="sku.skuId" lg="3" cols="12">
                 <VCard class="pl-4" outlined>
                   <VRadio :value="sku.skuId" class="mr-0">
                     <template #label>

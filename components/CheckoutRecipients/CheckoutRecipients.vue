@@ -133,11 +133,11 @@ export default {
         <VCard outlined>
           <VContainer>
             <VRow>
-              <VCol cols="1">
+              <VCol lg="1" sm="2" cols="3">
                 <VImg :src="detail.product.url"></VImg>
               </VCol>
 
-              <VCol cols="7">
+              <VCol lg="7" sm="8" cols="9">
                 <div class="text-h6">{{ detail.product.name }}</div>
                 <VListItemSubtitle>{{ detail.product.sku_type }}</VListItemSubtitle>
 
@@ -166,12 +166,12 @@ export default {
                 </VCard>
               </VCol>
 
-              <VCol cols="2" class="text-center" align-self="center">
+              <VCol lg="2" cols="6" class="text-center" align-self="center">
                 <div class="black--text text-subtitle-2">Price</div>
                 <div class="text-h6 pink--text font-weight-bold">${{ detail.product.price }}</div>
               </VCol>
 
-              <VCol cols="2" class="text-center" align-self="center">
+              <VCol lg="2" cols="6" class="text-center" align-self="center">
                 <div class="black--text text-subtitle-2">Subtotal</div>
                 <div class="text-h6 pink--text font-weight-bold">
                   ${{
@@ -195,7 +195,7 @@ export default {
 
           <VContainer class="py-8">
             <VRow>
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   :value="detail.delivery.firstname"
                   :rules="nameRules"
@@ -207,7 +207,7 @@ export default {
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'firstname' })" />
               </VCol>
 
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   :value="detail.delivery.lastname"
                   :rules="nameRules"
@@ -219,7 +219,7 @@ export default {
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'lastname' })" />
               </VCol>
 
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   :value="detail.delivery.email"
                   :rules="emailRules"
@@ -231,7 +231,7 @@ export default {
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'email' })" />
               </VCol>
 
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   v-mask="'###-###-####'"
                   :value="detail.delivery.phone"
@@ -245,7 +245,7 @@ export default {
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'phone' })" />
               </VCol>
 
-              <VCol cols="4">
+              <VCol md="4" cols="12">
                 <VTextField
                   :value="detail.delivery.zipcode"
                   :rules="numberRules"
@@ -263,7 +263,7 @@ export default {
                   " />
               </VCol>
 
-              <VCol cols="4">
+              <VCol md="4" cols="12">
                 <VTextField
                   :value="detail.delivery.state"
                   :rules="textRules"
@@ -275,7 +275,7 @@ export default {
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'state' })" />
               </VCol>
 
-              <VCol cols="4">
+              <VCol md="4" cols="12">
                 <VTextField
                   :value="detail.delivery.city"
                   :rules="textRules"
@@ -287,7 +287,7 @@ export default {
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'city' })" />
               </VCol>
 
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VAutocomplete
                   v-model="googleMapPlaces"
                   color="green"
@@ -299,7 +299,7 @@ export default {
                   return-object />
               </VCol>
 
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   :value="detail.delivery.address2"
                   color="green"
@@ -310,7 +310,7 @@ export default {
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'address2' })" />
               </VCol>
 
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   :value="detail.delivery.institution"
                   :rules="textRules"
@@ -322,7 +322,7 @@ export default {
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'institution' })" />
               </VCol>
 
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextField
                   :value="detail.delivery.institution_name"
                   :rules="textRules"
@@ -356,7 +356,7 @@ export default {
                   " />
               </VCol>
 
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextarea
                   :value="detail.delivery.message"
                   color="green"
@@ -367,7 +367,7 @@ export default {
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'message' })" />
               </VCol>
 
-              <VCol cols="6">
+              <VCol sm="6" cols="12">
                 <VTextarea
                   :value="detail.delivery.note"
                   color="green"

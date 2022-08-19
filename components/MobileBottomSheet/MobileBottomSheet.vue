@@ -7,11 +7,11 @@
         <VList nav dense>
           <VSubheader>NAVIGATION</VSubheader>
 
-          <VListItem to="/" nuxt>
+          <VListItem @click="$router.push({ path: '/' })">
             <VListItemTitle>Occassions</VListItemTitle>
           </VListItem>
 
-          <VListItem to="/" nuxt>
+          <VListItem @click="$router.push({ path: '/' })">
             <VListItemTitle>Birthday</VListItemTitle>
           </VListItem>
 
@@ -27,13 +27,13 @@
                 </VListItemContent>
               </template>
 
-              <VListItem to="/" nuxt>
+              <VListItem @click="$router.push({ path: '/' })">
                 <VListItemTitle>Standing Sprays &amp; Wreaths</VListItemTitle>
               </VListItem>
-              <VListItem to="/" nuxt>
+              <VListItem @click="$router.push({ path: '/' })">
                 <VListItemTitle>Funeral Service Bouquets</VListItemTitle>
               </VListItem>
-              <VListItem to="/" nuxt>
+              <VListItem @click="$router.push({ path: '/' })">
                 <VListItemTitle>For Caskets</VListItemTitle>
               </VListItem>
             </VListGroup>
@@ -45,31 +45,31 @@
                 </VListItemContent>
               </template>
 
-              <VListItem to="/" nuxt>
+              <VListItem @click="$router.push({ path: '/' })">
                 <VListItemTitle>Most Popular</VListItemTitle>
               </VListItem>
-              <VListItem to="/" nuxt>
+              <VListItem @click="$router.push({ path: '/' })">
                 <VListItemTitle>Sympathy Plants</VListItemTitle>
               </VListItem>
-              <VListItem to="/" nuxt>
+              <VListItem @click="$router.push({ path: '/' })">
                 <VListItemTitle>Sympathy Floral Baskets</VListItemTitle>
               </VListItem>
             </VListGroup>
           </VListGroup>
 
-          <VListItem to="/" value="" nuxt>
+          <VListItem @click="$router.push({ path: '/' })">
             <VListItemTitle>Get Well</VListItemTitle>
           </VListItem>
 
-          <VListItem to="/" value="" nuxt>
+          <VListItem @click="$router.push({ path: '/' })">
             <VListItemTitle>Winter</VListItemTitle>
           </VListItem>
 
-          <VListItem to="/" value="" nuxt>
+          <VListItem @click="$router.push({ path: '/' })">
             <VListItemTitle>Plants</VListItemTitle>
           </VListItem>
 
-          <VListItem to="/" value="" nuxt>
+          <VListItem @click="$router.push({ path: '/' })">
             <VListItemTitle>Roses</VListItemTitle>
           </VListItem>
         </VList>
