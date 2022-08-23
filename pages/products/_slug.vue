@@ -8,6 +8,7 @@ export default {
 
       const selectedAddOnOptions = Array(product.addons.length).fill({});
 
+<<<<<<< Updated upstream
       const newAddons = product.addons.map((item) => {
         item.addOnImageUrl = `${item.addOnId}.jpg`;
         return item;
@@ -15,11 +16,23 @@ export default {
       product.addons = newAddons;
 
       return { product, selectedAddOnOptions };
+=======
+      const skuTypes = product.sku_types;
+
+      return {
+        product,
+        selectedAddOnOptions,
+        skuTypes,
+        currentSkuId: skuTypes[0].skuId,
+        currentSkuName: skuTypes[0].skuTypeName
+      };
+>>>>>>> Stashed changes
     }
   },
 
   data: () => ({
-    addons: []
+    addons: [],
+    currentSkuName: null
   }),
 
   computed: {
@@ -57,6 +70,11 @@ export default {
       }
     },
 
+    updateSku() {
+      const sku = this.product.sku_types.filter((item) => item.skuId === this.currentSkuId);
+      this.currentSkuName = sku[0].skuTypeName;
+    },
+
     addToCart() {
       const newItem = {
         id: null,
@@ -71,7 +89,9 @@ export default {
             tax: (30 / 100) * 7,
             cargo: 15,
             addons: this.addons,
-            productPrice: this.productPrice
+            productPrice: this.productPrice,
+            skuId: this.currentSkuId,
+            skuName: this.currentSkuName
           }
         },
         product: {
@@ -140,18 +160,20 @@ export default {
             <VRow>
               <VCol v-for="sku in product.sku_types" :key="sku.skuId" lg="3" cols="12">
                 <VCard class="pl-4" outlined>
-                  <VRadio :value="sku.skuId" class="mr-0">
-                    <template #label>
-                      <VContainer class="py-4 pr-4" fluid>
-                        <div>
-                          <span v-text="sku.skuTypeName"></span>
-                          <strong
-                            class="pink--text"
-                            v-text="product.prices[sku.skuId].price"></strong>
-                        </div>
-                      </VContainer>
-                    </template>
-                  </VRadio>
+                  <VRadioGroup v-model="currentSkuId" @change="updateSku">
+                    <VRadio :value="sku.skuId" class="mr-0">
+                      <template #label>
+                        <VContainer class="py-4 pr-4" fluid>
+                          <div>
+                            <span v-text="sku.skuTypeName"></span>
+                            <strong
+                              class="pink--text"
+                              v-text="product.prices[sku.skuId].price"></strong>
+                          </div>
+                        </VContainer>
+                      </template>
+                    </VRadio>
+                  </VRadioGroup>
                 </VCard>
               </VCol>
             </VRow>

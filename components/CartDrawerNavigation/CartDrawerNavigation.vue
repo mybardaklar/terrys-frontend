@@ -26,7 +26,7 @@
             </strong>
             in your cart
           </div>
-          <VDivider></VDivider>
+          <VDivider />
         </VFlex>
 
         <VFlex fill-height>
@@ -39,11 +39,11 @@
                       :key="detail.product.id"
                       :img="detail.product.url"
                       :title="detail.product.name"
-                      :type="detail.product.sku_type"
+                      :type="detail.details.productDetails.skuName"
                       :price="detail.details.productDetails.productPrice"
                       :extras="detail.details.productDetails.addons"
                       :item-index="index" />
-                    <VDivider></VDivider>
+                    <VDivider />
                   </div>
                 </div>
               </VList>
