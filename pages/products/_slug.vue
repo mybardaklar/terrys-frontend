@@ -8,15 +8,12 @@ export default {
 
       const selectedAddOnOptions = Array(product.addons.length).fill({});
 
-<<<<<<< Updated upstream
       const newAddons = product.addons.map((item) => {
         item.addOnImageUrl = `${item.addOnId}.jpg`;
         return item;
       });
       product.addons = newAddons;
 
-      return { product, selectedAddOnOptions };
-=======
       const skuTypes = product.sku_types;
 
       return {
@@ -26,7 +23,6 @@ export default {
         currentSkuId: skuTypes[0].skuId,
         currentSkuName: skuTypes[0].skuTypeName
       };
->>>>>>> Stashed changes
     }
   },
 

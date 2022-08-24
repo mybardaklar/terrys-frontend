@@ -99,8 +99,6 @@ export default {
       </VCol>
     </VRow>
 
-    <div>{{ filteredProducts }}</div>
-
     <VRow align="center">
       <VCol lg="8" md="8" sm="8" cols="6">
         <div class="text-body-2" v-text="`${productSorted.length} products found`"></div>

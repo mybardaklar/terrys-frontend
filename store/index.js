@@ -118,15 +118,16 @@ export const mutations = {
   },
 
   SET_ALL_DELIVERIES_SAME_ADDRESS(state, value) {
-    const orderDetils = state.cart.order_details.map((item, index) => {
+    const orderDetails = state.cart.order_details.map((item, index) => {
       if (index !== 0) {
-        item.delivery = value;
+        item.delivery = value.delivery;
+        item.delivery_date = value.deliveryDate;
       }
 
       return item;
     });
 
-    state.cart.order_details = orderDetils;
+    state.cart.order_details = orderDetails;
   },
 
   SET_ORDER_ZIPCODE(state, obj) {
@@ -161,6 +162,10 @@ export const mutations = {
     // calculating total price
     state.cart.details.total_price =
       (cartSubtotal / 100) * state.cart.details.service_fee + cartSubtotal;
+  },
+
+  SET_ORDER_ID(state, value) {
+    state.cart.order_id = value;
   }
 };
 
@@ -243,12 +248,20 @@ export const actions = {
 
   setTotalPrice({ commit }) {
     commit('SET_TOTAL_PRICE');
+  },
+
+  setOrderId({ commit }, newValue) {
+    commit('SET_ORDER_ID', newValue);
   }
 };
 
 export const getters = {
   getCartDrawerNav: (state) => {
     return state.cartDrawerNav;
+  },
+
+  getCart(state) {
+    return state.cart;
   },
 
   getCartOrderDetails(state) {
@@ -289,5 +302,9 @@ export const getters = {
 
   getUser: (state) => {
     return state.user;
+  },
+
+  getOrderId(state) {
+    return state.cart.order_id;
   }
 };

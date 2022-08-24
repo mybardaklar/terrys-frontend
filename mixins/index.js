@@ -18,7 +18,7 @@ const mixin = {
     ],
     nameRules: [
       (v) => !!v || 'Field is required.',
-      (v) => v.length >= 5 || 'Name at least to be 5 characters.'
+      (v) => (v && v.length >= 5) || 'Name at least to be 5 characters.'
     ],
     emailRules: [
       (v) => !!v || 'Please enter a valid email.',
@@ -32,9 +32,27 @@ const mixin = {
         (v && v.length >= 8 && v.length <= 16) ||
         'Password length must be at least 8 characters and at most 16 characters.'
     ],
+    creditCardRules: {
+      number: [
+        (v) => !!v || 'This field is required.',
+        (v) => (v && v.length >= 19) || 'Credit card number length must be at least 16 characters.'
+      ],
+      expireDate: [
+        (v) => !!v || 'This field is required.',
+        (v) => (v && v.length >= 5) || 'Please enter a valid date.'
+      ],
+      cvc: [
+        (v) => !!v || 'This field is required.',
+        (v) => (v && v.length >= 3) || 'CVC code length must be at least 3 characters.'
+      ]
+    },
     textRules: [
       (v) => !!v || 'Field is required.',
       (v) => (v && v.length >= 2) || 'Field at least to be 5 characters.'
+    ],
+    zipcodeRules: [
+      (v) => !!v || 'Field is required.',
+      (v) => (v && v.length >= 5) || 'Please enter a valid zip code.'
     ],
     phoneRules: [
       (v) => !!v || 'Field is required.',
@@ -57,6 +75,7 @@ const mixin = {
   computed: {
     ...mapGetters([
       'getCartDrawerNav',
+      'getCart',
       'getCartOrderDetails',
       'getCartDetails',
       'getCartCustomer',
@@ -65,7 +84,8 @@ const mixin = {
       'getSubtotalPrice',
       'getTotalPrice',
       'getCheckoutStep',
-      'getUser'
+      'getUser',
+      'getOrderId'
     ])
   },
 
@@ -87,7 +107,8 @@ const mixin = {
       'setAllDeliveriesSameAddress',
       'setOrderZipCode',
       'setOrderDeliveryDate',
-      'setTotalPrice'
+      'setTotalPrice',
+      'setOrderId'
     ])
   }
 };

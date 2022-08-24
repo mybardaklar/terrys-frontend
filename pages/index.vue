@@ -99,20 +99,22 @@ export default {
 
     <VRow align="center">
       <VCol lg="8" md="8" sm="8" cols="12">
-        <VBreadcrumbs :items="breadcrumbs" class="px-0 py-0" large>
+        <VBreadcrumbs :items="breadcrumbs" class="px-0 py-0" color="green" large>
           <template #divider>
             <VIcon>fas fa-angle-right</VIcon>
           </template>
         </VBreadcrumbs>
       </VCol>
+
       <VCol lg="4" md="4" sm="4" cols="12">
         <VTextField
           v-model="search"
           label="Search"
-          placeholder="Product name or SKU ID"
+          placeholder="Search product name"
+          color="green"
           outlined
           dense
-          hide-details="auto"></VTextField>
+          hide-details="auto" />
       </VCol>
     </VRow>
 
@@ -120,19 +122,21 @@ export default {
       <VCol lg="8" md="8" sm="8" cols="6">
         <div class="text-body-2" v-text="`${getProductsLength} products found`"></div>
       </VCol>
+
       <VCol lg="4" md="4" sm="4" cols="6">
         <VSelect
           v-model="sortOption"
           :items="selectBoxOptions"
+          color="green"
           item-text="text"
           item-value="value"
           hide-details="auto"
           dense
-          single-line></VSelect>
+          single-line />
       </VCol>
     </VRow>
 
-    <ProductList :key="filteredProducts[0].name" :products="filteredProducts"></ProductList>
+    <ProductList :key="filteredProducts[0].name" :products="filteredProducts" />
 
     <div class="my-8 text-center">
       <VBtn color="green" dark elevation="0" large @click="loadMore()">Load More</VBtn>

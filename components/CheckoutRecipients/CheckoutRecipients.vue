@@ -2,7 +2,7 @@
 export default {
   data: () => ({
     formValidation: false,
-    googleMapPlaces: null,
+    autocomplete: null,
     occasions: [
       {
         id: 1,
@@ -87,14 +87,17 @@ export default {
     }
   },
 
+  mounted() {},
+
   methods: {
     useSameAddressMethod() {
       this.useSameAddress = !this.useSameAddress;
 
       if (this.useSameAddress === true) {
-        const deliveryInformation = { ...this.getCartOrderDetails[0].delivery };
-
-        this.setAllDeliveriesSameAddress(deliveryInformation);
+        this.setAllDeliveriesSameAddress({
+          delivery: this.getCartOrderDetails[0].delivery,
+          deliveryDate: this.getCartOrderDetails[0].delivery_date
+        });
       }
     },
 
@@ -102,12 +105,17 @@ export default {
       const inputZipCode = this.getCartOrderDetails[index].delivery.zipcode;
 
       if (inputZipCode && inputZipCode !== '') {
-        const response = await this.$axios.$get(`/api/timezones?zip=${inputZipCode}`);
+        try {
+          const response = await this.$axios.$get(`/api/timezones?zip=${inputZipCode}`);
 
-        this.setOrderZipCode({ index, timezone: response });
+          this.setOrderZipCode({ index, timezone: response });
 
-        this.dateModalValue = true;
-        this.dateModalIndex = index;
+          this.dateModalValue = true;
+          this.dateModalIndex = index;
+        } catch (error) {
+          console.log(error);
+          this.updateOrderDelivery({ index, value: '', key: 'zipcode' });
+        }
       }
     },
 
@@ -118,6 +126,88 @@ export default {
     saveDeliveryDate(e) {
       this.setOrderDeliveryDate({ index: this.dateModalIndex, date: e });
       this.dateModalValue = false;
+    },
+
+    findMap(orderIndex) {
+      // eslint-disable-next-line
+
+      const input = document.getElementById('searchTextField');
+      const options = {
+        componenRestrictions: {
+          country: 'us'
+        },
+        fields: ['address_components'],
+        types: ['address']
+      };
+
+      // eslint-disable-next-line
+      this.autocomplete = new google.maps.places.Autocomplete(input, options);
+
+      this.autocomplete.addListener('place_changed', () => {
+        const place = this.autocomplete.getPlace();
+
+        if (place && place.address_components) {
+          const streetNumber = place.address_components.find(
+            (item) => item?.types[0] === 'street_number'
+          );
+
+          for (let index = 0; index < place.address_components.length; index++) {
+            const local = place.address_components[index];
+
+            switch (local.types[0]) {
+              case 'route':
+                this.updateOrderDelivery({
+                  index: orderIndex,
+                  value: `${streetNumber ? streetNumber.long_name + ' ' : ''}${local.long_name}`,
+                  key: 'address1'
+                });
+                break;
+
+              case 'postal_code':
+                this.updateOrderDelivery({
+                  index: orderIndex,
+                  value: local.long_name,
+                  key: 'zipcode'
+                });
+                break;
+
+              case 'administrative_area_level_1':
+                this.updateOrderDelivery({
+                  index: orderIndex,
+                  value: local.short_name,
+                  key: 'state'
+                });
+                break;
+
+              case 'administrative_area_level_2':
+                this.updateOrderDelivery({
+                  index: orderIndex,
+                  value: local.long_name,
+                  key: 'city'
+                });
+                break;
+
+              default:
+                break;
+            }
+          }
+        }
+      });
+    },
+
+    async nextStep() {
+      if (this.formValidation) {
+        try {
+          const request = await this.$axios.$post('/api/orders/orderCreate', this.getCart);
+
+          if (request) {
+            this.setOrderId(request.order_id);
+            this.setCheckoutStep(3);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
     }
   }
 };
@@ -245,10 +335,37 @@ export default {
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'phone' })" />
               </VCol>
 
+              <VCol sm="6" cols="12">
+                <VTextField
+                  id="searchTextField"
+                  :value="detail.delivery.address1"
+                  :rules="textRules"
+                  color="green"
+                  label="Recipient's Address 1"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @keydown="findMap(index)"
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'address1' })" />
+              </VCol>
+
+              <VCol sm="6" cols="12">
+                <VTextField
+                  ref="address2"
+                  :value="detail.delivery.address2"
+                  :rules="textRules"
+                  color="green"
+                  label="Recipient's Address 2"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'address2' })" />
+              </VCol>
+
               <VCol md="4" cols="12">
                 <VTextField
                   :value="detail.delivery.zipcode"
-                  :rules="numberRules"
+                  :rules="zipcodeRules"
                   color="green"
                   label="Zip/Postal Code"
                   hide-details="auto"
@@ -285,29 +402,6 @@ export default {
                   dense
                   outlined
                   @input="(e) => updateOrderDelivery({ index, value: e, key: 'city' })" />
-              </VCol>
-
-              <VCol sm="6" cols="12">
-                <VAutocomplete
-                  v-model="googleMapPlaces"
-                  color="green"
-                  label="Recipient's Address 1"
-                  hide-details="auto"
-                  dense
-                  outlined
-                  hide-no-data
-                  return-object />
-              </VCol>
-
-              <VCol sm="6" cols="12">
-                <VTextField
-                  :value="detail.delivery.address2"
-                  color="green"
-                  label="Recipient's Address 2"
-                  hide-details="auto"
-                  dense
-                  outlined
-                  @input="(e) => updateOrderDelivery({ index, value: e, key: 'address2' })" />
               </VCol>
 
               <VCol sm="6" cols="12">
@@ -392,10 +486,6 @@ export default {
                 </VCheckbox>
               </div>
             </template>
-
-            <!-- <VBtn color="green" elevation="0" class="mt-8" block dark>
-            Save Address To Continue
-          </VBtn> -->
           </VContainer>
         </VCard>
       </div>
@@ -413,7 +503,7 @@ export default {
             elevation="0"
             :dark="formValidation"
             :disabled="!formValidation"
-            @click="setCheckoutStep(3)">
+            @click="nextStep">
             Next
             <VIcon right>fas fa-arrow-right</VIcon>
           </VBtn>

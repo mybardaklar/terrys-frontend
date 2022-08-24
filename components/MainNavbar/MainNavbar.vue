@@ -8,63 +8,67 @@
         <div class="mainNavbar__dropdown">
           <ul>
             <li>
-              <a :href="`/categories/mothers-day`">Mother's Day</a>
+              <NuxtLink to="/categories/mothers-day">Mother's Day</NuxtLink>
             </li>
             <li>
-              <a href="/categories/best-sellers">Best Sellers</a>
+              <NuxtLink to="/categories/best-sellers">Best Sellers</NuxtLink>
             </li>
             <li>
-              <a href="/categories/anniversary">Anniversary</a>
+              <NuxtLink to="/categories/anniversary">Anniversary</NuxtLink>
             </li>
             <li>
-              <a href="/categories/birthday-flowers">Birthday Flowers</a>
+              <NuxtLink to="/categories/birthday">Birthday Flowers</NuxtLink>
             </li>
             <li>
-              <a href="#">Business Gifts</a>
+              <NuxtLink to="/categories/business-gifts">Business Gifts</NuxtLink>
             </li>
             <li>
-              <a href="#">Congratulations</a>
+              <NuxtLink to="/categories/congratulations">Congratulations</NuxtLink>
             </li>
             <li>
-              <a href="#">New Baby</a>
+              <NuxtLink to="/categories/new-baby">New Baby</NuxtLink>
             </li>
             <li>
-              <a href="#">Get Well</a>
+              <NuxtLink to="/categories/get-well">Get Well</NuxtLink>
             </li>
             <li>
-              <a href="#">Just Because</a>
+              <NuxtLink to="/categories/just-because">Just Because</NuxtLink>
             </li>
             <li>
-              <a href="#">Love &amp; Romance</a>
+              <NuxtLink to="/categories/love-romance">Love &amp; Romance</NuxtLink>
             </li>
             <li>
-              <a href="#">Thank You</a>
+              <NuxtLink to="/categories/thank-you">Thank You</NuxtLink>
             </li>
             <li>
-              <a href="#">Thinking of You</a>
+              <NuxtLink to="/categories/thinking-of-you">Thinking of You</NuxtLink>
             </li>
           </ul>
         </div>
       </li>
 
       <li>
-        <a href="#">Birthday</a>
+        <NuxtLink to="/categories/birthday">Birthday</NuxtLink>
       </li>
 
       <li>
-        <a href="#">Sympathy</a>
+        <NuxtLink to="/categories/all-sympathy">Sympathy</NuxtLink>
         <div class="mainNavbar__megamenu">
           <div class="mainNavbar__megamenu__section">
             <h6>For Services</h6>
             <ul>
               <li>
-                <a href="#">Standing Sprays &amp; Wreaths</a>
+                <NuxtLink to="/categories/standing-sprays-wreaths"
+                  >Standing Sprays &amp; Wreaths</NuxtLink
+                >
               </li>
               <li>
-                <a href="#">Funeral Service Bouquets</a>
+                <NuxtLink to="/categories/funeral-service-bouquets"
+                  >Funeral Service Bouquets</NuxtLink
+                >
               </li>
               <li>
-                <a href="#">For Caskets</a>
+                <NuxtLink to="/categories/for-caskets">For Caskets</NuxtLink>
               </li>
             </ul>
           </div>
@@ -73,13 +77,15 @@
             <h6>For the Home</h6>
             <ul>
               <li>
-                <a href="#">Most Popular</a>
+                <NuxtLink to="#">Most Popular</NuxtLink>
               </li>
               <li>
-                <a href="#">Sympathy Plants</a>
+                <NuxtLink to="/categories/sympathy-plants">Sympathy Plants</NuxtLink>
               </li>
               <li>
-                <a href="#">Sympathy Floral Baskets</a>
+                <NuxtLink to="/categories/sympathy-floral-baskets"
+                  >Sympathy Floral Baskets</NuxtLink
+                >
               </li>
             </ul>
           </div>
@@ -87,19 +93,19 @@
       </li>
 
       <li>
-        <a href="#">Get Well</a>
+        <NuxtLink to="/categories/get-well">Get Well</NuxtLink>
       </li>
 
       <li>
-        <a href="#">Winter</a>
+        <NuxtLink to="/categories/winter-flowers">Winter</NuxtLink>
       </li>
 
       <li>
-        <a href="#">Plants</a>
+        <NuxtLink to="/categories/gift-baskets-plants">Plants</NuxtLink>
       </li>
 
       <li>
-        <a href="#">Roses</a>
+        <NuxtLink to="/categories/roses">Roses</NuxtLink>
       </li>
     </ul>
   </nav>

@@ -47,7 +47,7 @@ export default {
     max-width: 50%;
   }
 
-  @media only screen and (max-width: 959px) {
+  @media only screen and (max-width: 1903px) {
     max-width: none;
   }
 }

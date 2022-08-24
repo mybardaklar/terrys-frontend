@@ -1,3 +1,13 @@
+<script>
+export default {
+  methods: {
+    reloadPage() {
+      window.location.replace('/checkout');
+    }
+  }
+};
+</script>
+
 <template>
   <VCard outlined>
     <VCardText class="text-center">
@@ -12,7 +22,7 @@
 
       <div class="mt-6">
         <div class="d-flex justify-center">
-          <VBtn to="/checkout" color="red" class="ml-2" depressed dark>
+          <VBtn color="red" class="ml-2" depressed dark @click="reloadPage">
             <VIcon size="20" class="mr-2">fas fa-arrow-rotate-left</VIcon>
             Try Again
           </VBtn>

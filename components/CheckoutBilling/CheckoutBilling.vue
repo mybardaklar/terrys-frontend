@@ -17,46 +17,63 @@ export default {
         fields: ['address_components'],
         types: ['address']
       };
+
       // eslint-disable-next-line
       this.autocomplete = new google.maps.places.Autocomplete(input, options);
 
       this.autocomplete.addListener('place_changed', () => {
         const place = this.autocomplete.getPlace();
 
-        for (let index = 0; index < place.address_components.length; index++) {
-          const local = place.address_components[index];
+        if (place && place.address_components) {
+          const streetNumber = place.address_components.find(
+            (item) => item?.types[0] === 'street_number'
+          );
 
-          switch (local.types[0]) {
-            case 'street_number':
-              this.updateUser({ value: local.long_name, key: 'address1' });
-              break;
-            case 'postal_code':
-              this.updateUser({ value: local.long_name, key: 'zipcode' });
-              break;
+          for (let index = 0; index < place.address_components.length; index++) {
+            const local = place.address_components[index];
 
-            case 'administrative_area_level_1':
-              this.updateUser({ value: local.short_name, key: 'state' });
-              break;
+            switch (local.types[0]) {
+              case 'route':
+                this.updateUser({
+                  value: `${streetNumber ? streetNumber.long_name + ' ' : ''}${local.long_name}`,
+                  key: 'address1'
+                });
+                break;
+              case 'postal_code':
+                this.updateUser({ value: local.long_name, key: 'zipcode' });
+                break;
 
-            case 'administrative_area_level_2':
-              this.updateUser({ value: local.long_name, key: 'city' });
-              break;
+              case 'administrative_area_level_1':
+                this.updateUser({ value: local.short_name, key: 'state' });
+                break;
 
-            default:
-              break;
+              case 'administrative_area_level_2':
+                this.updateUser({ value: local.long_name, key: 'city' });
+                break;
+
+              default:
+                break;
+            }
           }
+
+          this.$refs.address2.focus();
         }
       });
     },
 
     async nextStep() {
       if (this.formValidation) {
-        const customer = await this.$axios.$put('/api/customers', this.getUser);
+        try {
+          const customer = await this.$axios.$put('/api/customers', this.getUser);
 
-        if (customer) {
-          this.setUser(customer);
-          this.setCustomerId(customer.id);
-          this.setCheckoutStep(2);
+          if (customer) {
+            this.setUser(customer);
+            this.setCustomerId(customer.id);
+            this.setCheckoutStep(2);
+          }
+        } catch (error) {
+          console.log(error);
+          this.setUserModal({ active: true, type: 'sign_in' });
         }
       }
     }
@@ -153,7 +170,9 @@ export default {
 
       <VCol sm="6" cols="12">
         <VTextField
+          ref="address2"
           :value="getUser.details.addressInformation.address2"
+          :rules="textRules"
           color="green"
           label="Address 2"
           hide-details="auto"
@@ -211,7 +230,7 @@ export default {
             (e) => {
               updateUser({ value: e, key: 'zipcode' });
             }
-          "></VTextField>
+          " />
       </VCol>
 
       <VCol cols="6">

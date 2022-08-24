@@ -27,65 +27,73 @@ export default {
       <VImg src="/images/banner-memorial.webp"></VImg>
     </div>
 
-    <div v-if="getCheckoutStep !== undefined" class="mt-8">
-      <template v-if="getCheckoutStep === 4">
-        <CheckoutSuccessful />
-      </template>
+    <div v-if="getCartOrderDetails.length > 0">
+      <div v-if="getCheckoutStep !== undefined" class="mt-8">
+        <template v-if="getCheckoutStep === 4">
+          <CheckoutSuccessful />
+        </template>
 
-      <template v-else-if="getCheckoutStep === 5">
-        <CheckoutFailed />
-      </template>
+        <template v-else-if="getCheckoutStep === 5">
+          <CheckoutFailed />
+        </template>
 
-      <template v-else>
-        <VRow>
-          <VCol xl="9" lg="8" cols="12">
-            <VCard outlined>
-              <VStepper :value="getCheckoutStep" elevation="0" @change="setCheckoutStep">
-                <VStepperHeader>
-                  <VStepperStep
-                    color="green"
-                    step="1"
-                    :complete="parseInt(getCheckoutStep) > 1"
-                    class="text-body-2 font-weight-bold">
-                    Bill to
-                  </VStepperStep>
+        <template v-else>
+          <VRow>
+            <VCol xl="9" lg="8" cols="12">
+              <VCard outlined>
+                <VStepper :value="getCheckoutStep" elevation="0" @change="setCheckoutStep">
+                  <VStepperHeader>
+                    <VStepperStep
+                      color="green"
+                      step="1"
+                      :complete="parseInt(getCheckoutStep) > 1"
+                      class="text-body-2 font-weight-bold">
+                      Bill to
+                    </VStepperStep>
 
-                  <VDivider></VDivider>
+                    <VDivider></VDivider>
 
-                  <VStepperStep
-                    color="green"
-                    step="2"
-                    :complete="parseInt(getCheckoutStep) > 2"
-                    class="text-body-2">
-                    Recipients
-                  </VStepperStep>
+                    <VStepperStep
+                      color="green"
+                      step="2"
+                      :complete="parseInt(getCheckoutStep) > 2"
+                      class="text-body-2">
+                      Recipients
+                    </VStepperStep>
 
-                  <VDivider></VDivider>
+                    <VDivider></VDivider>
 
-                  <VStepperStep
-                    color="green"
-                    step="3"
-                    :complete="parseInt(getCheckoutStep) > 3"
-                    class="text-body-2">
-                    Review Order &amp; Payment
-                  </VStepperStep>
-                </VStepperHeader>
-              </VStepper>
+                    <VStepperStep
+                      color="green"
+                      step="3"
+                      :complete="parseInt(getCheckoutStep) > 3"
+                      class="text-body-2">
+                      Review Order &amp; Payment
+                    </VStepperStep>
+                  </VStepperHeader>
+                </VStepper>
 
-              <div class="pa-5">
-                <CheckoutBilling v-if="getCheckoutStep === 1" />
-                <CheckoutRecipients v-if="getCheckoutStep === 2" />
-                <CheckoutPayment v-if="getCheckoutStep === 3" />
-              </div>
-            </VCard>
-          </VCol>
+                <div class="pa-5">
+                  <CheckoutBilling v-if="getCheckoutStep === 1" />
+                  <CheckoutRecipients v-if="getCheckoutStep === 2" />
+                  <CheckoutPayment v-if="getCheckoutStep === 3" />
+                </div>
+              </VCard>
+            </VCol>
 
-          <VCol xl="3" lg="4" cols="12">
-            <CheckoutDiscountCode />
-            <CheckoutCartSummary class="mt-8" />
-          </VCol>
-        </VRow>
-      </template>
+            <VCol xl="3" lg="4" cols="12">
+              <CheckoutDiscountCode />
+              <CheckoutCartSummary class="mt-8" />
+            </VCol>
+          </VRow>
+        </template>
+      </div>
     </div>
+
+    <VCard v-else outlined class="mt-8">
+      <VCardText>
+        <div class="text-overline text-center">Your cart is empty.</div>
+      </VCardText>
+    </VCard>
   </VContainer>
 </template>

@@ -1,7 +1,7 @@
 <script src="./MainFooter.js"></script>
 
 <template>
-  <div>
+  <VContainer>
     <VCard class="mt-8" outlined>
       <VCardTitle>Terry’s Difference</VCardTitle>
       <VCardText>
@@ -75,13 +75,18 @@
           &copy; {{ new Date().getFullYear() }} terrysflorist.com. All Rights Reserved<br />Terrys
           Florist LLC
         </VCardText>
-        <VDivider></VDivider>
-        <VCardText>
-          <VBtn color="green">SIGN UP FOR 10% OFF!</VBtn>
-        </VCardText>
+
+        <template v-if="!getUser.accessToken">
+          <VDivider />
+          <VCardText>
+            <VBtn color="green" dark @click="setUserModal({ active: true, type: 'sign_up' })">
+              SIGN UP FOR 10% OFF!
+            </VBtn>
+          </VCardText>
+        </template>
       </VCard>
     </VContainer>
-  </div>
+  </VContainer>
 </template>
 
 <style lang="scss" src="./MainFooter.scss" scoped></style>

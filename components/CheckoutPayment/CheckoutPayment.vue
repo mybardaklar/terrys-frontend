@@ -2,11 +2,38 @@
 export default {
   data: () => ({
     paymentMethod: 'creditCard',
-    creditCardHolder: null,
-    creditCardNumber: null,
-    creditCardExpireDate: null,
-    creditCardCvc: null
-  })
+    creditCardHolderFirstName: 'Mahmut',
+    creditCardHolderLastName: 'Uzun',
+    creditCardNumber: '4007 0000 0002 7777',
+    creditCardExpireDate: '0822',
+    creditCardCvc: '555',
+
+    creditCardFormValidation: false
+  }),
+
+  methods: {
+    async nextStep() {
+      // eslint-disable-next-line
+      try {
+        if (this.paymentMethod === 'creditCard') {
+          const request = await this.$axios.$post('/api/payments', {
+            cardNumber: this.creditCardNumber,
+            expirationDate: this.creditCardExpireDate,
+            cardCode: this.creditCardCvc,
+            firstname: this.creditCardHolderFirstName,
+            lastname: this.creditCardHolderLastName,
+            orderId: this.getOrderId
+          });
+
+          console.log(request);
+          this.setCheckoutStep(4);
+        }
+      } catch (error) {
+        console.log(error);
+        this.setCheckoutStep(5);
+      }
+    }
+  }
 };
 </script>
 
@@ -199,6 +226,7 @@ export default {
         :color="paymentMethod === 'creditCard' ? 'rgba(90, 181, 94, 0.2)' : ''"
         class="mt-4"
         outlined
+        :ripple="false"
         @click="paymentMethod = 'creditCard'">
         <VCardText>
           <div>
@@ -239,50 +267,63 @@ export default {
           </div>
 
           <div v-show="paymentMethod === 'creditCard' ? true : false" class="mt-4">
-            <VRow>
-              <VCol sm="6" cols="12">
-                <VTextField
-                  v-model="creditCardHolder"
-                  color="green"
-                  label="Card Holder"
-                  hide-details="auto"
-                  dense
-                  outlined />
-              </VCol>
-              <VCol sm="6" cols="12">
-                <VTextField
-                  v-model="creditCardNumber"
-                  v-mask="'#### #### #### ####'"
-                  color="green"
-                  label="Card Number"
-                  hide-details="auto"
-                  dense
-                  outlined
-                  return-masked-value />
-              </VCol>
-              <VCol sm="6" cols="12">
-                <VTextField
-                  v-model="creditCardExpireDate"
-                  v-mask="'## / ####'"
-                  color="green"
-                  label="Expiration Date"
-                  hide-details="auto"
-                  dense
-                  outlined
-                  return-masked-value />
-              </VCol>
-              <VCol sm="6" cols="12">
-                <VTextField
-                  v-model="creditCardCvc"
-                  v-mask="'###'"
-                  color="green"
-                  label="Card Security Code"
-                  hide-details="auto"
-                  dense
-                  outlined
-                  return-masked-value />
-              </VCol>
-            </VRow>
+            <VForm v-model="creditCardFormValidation">
+              <VRow>
+                <VCol sm="6" cols="12">
+                  <VTextField
+                    v-model="creditCardHolderFirstName"
+                    :rules="textRules"
+                    color="green"
+                    label="Card Holder First Name"
+                    hide-details="auto"
+                    dense
+                    outlined />
+                </VCol>
+                <VCol sm="6" cols="12">
+                  <VTextField
+                    v-model="creditCardHolderLastName"
+                    :rules="textRules"
+                    color="green"
+                    label="Card Holder Last Name"
+                    hide-details="auto"
+                    dense
+                    outlined />
+                </VCol>
+                <VCol sm="6" cols="12">
+                  <VTextField
+                    v-model="creditCardNumber"
+                    v-mask="'####-####-####-####'"
+                    :rules="creditCardRules.number"
+                    color="green"
+                    label="Card Number"
+                    hide-details="auto"
+                    dense
+                    outlined />
+                </VCol>
+                <VCol sm="6" cols="12">
+                  <VTextField
+                    v-model="creditCardExpireDate"
+                    v-mask="'##/##'"
+                    :rules="creditCardRules.expireDate"
+                    color="green"
+                    label="Expiration Date"
+                    hide-details="auto"
+                    dense
+                    outlined />
+                </VCol>
+                <VCol sm="6" cols="12">
+                  <VTextField
+                    v-model="creditCardCvc"
+                    v-mask="'###'"
+                    :rules="creditCardRules.cvc"
+                    color="green"
+                    label="Card Security Code"
+                    hide-details="auto"
+                    dense
+                    outlined />
+                </VCol>
+              </VRow>
+            </VForm>
           </div>
         </VCardText>
       </VCard>
@@ -296,7 +337,12 @@ export default {
         </VBtn>
       </VCol>
       <VCol cols="6" class="text-right">
-        <VBtn color="green" elevation="0" dark @click="setCheckoutStep(4)">
+        <VBtn
+          color="green"
+          elevation="0"
+          :dark="creditCardFormValidation"
+          :disabled="!creditCardFormValidation"
+          @click="nextStep()">
           Next
           <VIcon right>fas fa-arrow-right</VIcon>
         </VBtn>
