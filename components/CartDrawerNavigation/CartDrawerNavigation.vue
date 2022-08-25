@@ -20,8 +20,7 @@
 
           <div class="text-subtitle-2 pa-3 text-uppercase">
             <strong class="font-weight-black">
-              <span
-                v-text="getCartOrderDetails.length > 0 ? getCartOrderDetails.length : '0'"></span>
+              <span>{{ getCartOrderDetails.length > 0 ? getCartOrderDetails.length : '0' }}</span>
               items
             </strong>
             in your cart
@@ -34,7 +33,7 @@
             <VFlex fill-height>
               <VList three-line>
                 <div v-for="(detail, index) in getCartOrderDetails" :key="index">
-                  <div>
+                  <client-only>
                     <CartDrawerNavProduct
                       :key="detail.product.id"
                       :img="detail.product.url"
@@ -44,7 +43,7 @@
                       :extras="detail.details.productDetails.addons"
                       :item-index="index" />
                     <VDivider />
-                  </div>
+                  </client-only>
                 </div>
               </VList>
             </VFlex>

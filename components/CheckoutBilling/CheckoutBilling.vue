@@ -72,6 +72,7 @@ export default {
             this.setCheckoutStep(2);
           }
         } catch (error) {
+          // eslint-disable-next-line
           console.log(error);
           this.setUserModal({ active: true, type: 'sign_in' });
         }

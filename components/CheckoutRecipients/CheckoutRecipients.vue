@@ -113,6 +113,7 @@ export default {
           this.dateModalValue = true;
           this.dateModalIndex = index;
         } catch (error) {
+          // eslint-disable-next-line
           console.log(error);
           this.updateOrderDelivery({ index, value: '', key: 'zipcode' });
         }
@@ -205,6 +206,7 @@ export default {
             this.setCheckoutStep(3);
           }
         } catch (error) {
+          // eslint-disable-next-line
           console.log(error);
         }
       }

@@ -1,6 +1,8 @@
 <script>
 import ProductList from '~/components/ProductList/ProductList.vue';
 
+const titleCase = require('ap-style-title-case');
+
 export default {
   components: { ProductList },
   async asyncData({ $axios, route }) {
@@ -17,21 +19,18 @@ export default {
     search: '',
     breadcrumbs: [
       {
-        text: 'Category',
+        text: 'Home',
         disabled: false,
-        href: 'categories'
-      },
-      {
-        text: 'Best Sellers',
-        disabled: true,
-        href: 'best-sellers'
+        href: '/'
       }
     ],
     selectBoxOptions: [
       { value: 'lowestPrice', text: 'Sort by: Lowest Price' },
       { value: 'highestPrice', text: 'Sort by: Highest Price' }
     ],
-    selectBoxSelectedOption: { value: 'lowestPrice' }
+    selectBoxSelectedOption: { value: 'lowestPrice' },
+
+    sortOption: 'lowestPrice'
   }),
 
   computed: {
@@ -57,22 +56,40 @@ export default {
     },
 
     filteredProducts() {
-      // eslint-disable-next-line
-      let filteredProducts;
+      if (this.sortOption === 'lowestPrice') {
+        // eslint-disable-next-line
+        return this.productSorted.sort(
+          (a, b) => parseFloat(a.price).toFixed(2) - parseFloat(b.price).toFixed(2)
+        );
+      } else if (this.sortOption === 'highestPrice') {
+        // eslint-disable-next-line
+        let data = this.productSorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
 
-      if (this.selectBoxSelectedOption.value === 'lowestPrice') {
-        // eslint-disable-next-line
-        filteredProducts = this.productSorted.sort(
-          (a, b) => parseFloat(a.price) - parseFloat(b.price)
-        );
-      } else {
-        // eslint-disable-next-line
-        filteredProducts = this.productSorted.sort(
-          (a, b) => parseFloat(b.price) - parseFloat(a.price)
-        );
+        return data;
       }
 
-      return this.productSorted;
+      return [];
+    },
+
+    crumbs() {
+      const fullPath = this.$route.fullPath;
+      const params = fullPath.startsWith('/')
+        ? fullPath.substring(1).split('/')
+        : fullPath.split('/');
+      const crumbs = [];
+      let path = '';
+      params.forEach((param, index) => {
+        path = `${path}/${param}`;
+        const match = this.$router.match(path);
+        if (match.name !== null) {
+          crumbs.push({
+            text: titleCase(param.replace(/-/g, ' ')),
+            href: match.fullPath,
+            disabled: true
+          });
+        }
+      });
+      return crumbs;
     }
   }
 };
@@ -82,9 +99,11 @@ export default {
   <div>
     <VRow align="center">
       <VCol lg="8" md="8" sm="8" cols="12">
-        <VBreadcrumbs :items="breadcrumbs" class="px-0 py-0" large>
-          <template #divider>
-            <VIcon>fas fa-angle-right</VIcon>
+        <VBreadcrumbs :items="crumbs" class="px-0 pb-0">
+          <template #item="{ item }">
+            <VBreadcrumbsItem :href="item.href" :disabled="item.disabled">
+              {{ item.text.toUpperCase() }}
+            </VBreadcrumbsItem>
           </template>
         </VBreadcrumbs>
       </VCol>
@@ -101,21 +120,21 @@ export default {
 
     <VRow align="center">
       <VCol lg="8" md="8" sm="8" cols="6">
-        <div class="text-body-2" v-text="`${productSorted.length} products found`"></div>
+        <div class="text-body-2">{{ `${productSorted.length} products found` }}</div>
       </VCol>
       <VCol lg="4" md="4" sm="4" cols="6">
         <VSelect
-          v-model="selectBoxSelectedOption"
+          v-model="sortOption"
           :items="selectBoxOptions"
+          color="green"
           item-text="text"
           item-value="value"
           hide-details="auto"
           dense
-          single-line
-          return-object></VSelect>
+          single-line />
       </VCol>
     </VRow>
 
-    <ProductList :products="productSorted"></ProductList>
+    <ProductList :key="filteredProducts[0].name" :products="filteredProducts" />
   </div>
 </template>

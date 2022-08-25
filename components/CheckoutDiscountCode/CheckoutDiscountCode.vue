@@ -10,10 +10,9 @@ export default {
   <VCard outlined>
     <VCardTitle class="d-flex justify-space-between cursor-pointer" @click="isActive = !isActive">
       <span class="text-subtitle-1 font-weight-bold">Discount Codes</span>
-      <VIcon
-        class="black--text"
-        size="16"
-        v-text="isActive ? 'fas fa-caret-up' : 'fas fa-caret-down'"></VIcon>
+      <VIcon class="black--text" size="16">
+        {{ isActive ? 'fas fa-caret-up' : 'fas fa-caret-down' }}
+      </VIcon>
     </VCardTitle>
 
     <VCardText v-show="isActive">

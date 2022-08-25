@@ -16,18 +16,6 @@ export default {
   data: () => ({
     pagination: 0,
     search: '',
-    breadcrumbs: [
-      {
-        text: 'Category',
-        disabled: false,
-        href: 'categories'
-      },
-      {
-        text: 'Best Sellers',
-        disabled: true,
-        href: 'best-sellers'
-      }
-    ],
     selectBoxOptions: [
       { value: 'lowestPrice', text: 'Sort by: Lowest Price' },
       { value: 'highestPrice', text: 'Sort by: Highest Price' }
@@ -99,11 +87,7 @@ export default {
 
     <VRow align="center">
       <VCol lg="8" md="8" sm="8" cols="12">
-        <VBreadcrumbs :items="breadcrumbs" class="px-0 py-0" color="green" large>
-          <template #divider>
-            <VIcon>fas fa-angle-right</VIcon>
-          </template>
-        </VBreadcrumbs>
+        <div class="text-body-2">{{ `${getProductsLength} products found` }}</div>
       </VCol>
 
       <VCol lg="4" md="4" sm="4" cols="12">
@@ -119,9 +103,7 @@ export default {
     </VRow>
 
     <VRow align="center">
-      <VCol lg="8" md="8" sm="8" cols="6">
-        <div class="text-body-2" v-text="`${getProductsLength} products found`"></div>
-      </VCol>
+      <VCol lg="8" md="8" sm="8" cols="6" />
 
       <VCol lg="4" md="4" sm="4" cols="6">
         <VSelect

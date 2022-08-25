@@ -9,16 +9,16 @@
     </VListItemAvatar>
 
     <VListItemContent>
-      <VListItemTitle v-text="title"></VListItemTitle>
-      <VListItemSubtitle v-text="type"></VListItemSubtitle>
+      <VListItemTitle>{{ title }}</VListItemTitle>
+      <VListItemSubtitle>{{ type }}</VListItemSubtitle>
       <div class="text-caption mt-1" style="line-height: 1.4">
         <div v-for="(extra, index) in extras" :key="index" class="mt-1">
           <div>
-            <strong v-text="extra.addOnOptions[0].name"></strong>
-            <span v-text="`(${extra.addOnName})`"></span>
+            <strong>extra.addOnOptions[0].name</strong>
+            <span>{{ `(${extra.addOnName})` }}</span>
           </div>
           <strong class="d-block pink--text">
-            <span v-text="extra.addOnOptions[0].price"></span>
+            <span>{{ extra.addOnOptions[0].price }}</span>
           </strong>
         </div>
       </div>
@@ -27,11 +27,11 @@
     <VListItemAction>
       <VListItemActionText>
         <div class="text-h6 pink--text">
-          $<span v-text="(Math.floor(price * 100) / 100).toFixed(2)"></span>
+          $<span>{{ (Math.floor(price * 100) / 100).toFixed(2) }}</span>
         </div>
       </VListItemActionText>
 
-      <VBtn color="red darken-1" dark x-small outlined @click="deleteItem()"> Remove </VBtn>
+      <VBtn color="red darken-1" dark x-small outlined @click="deleteItem()">Remove</VBtn>
     </VListItemAction>
   </VListItem>
 </template>

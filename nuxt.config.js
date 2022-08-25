@@ -7,7 +7,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'nuxt-toolbox',
-    titleTemplate: '%s - terrysflorist',
+    titleTemplate: `%s - Terry's Florist`,
     htmlAttrs: {
       lang: 'en'
     },
@@ -15,12 +15,43 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'p:domain_verify', content: '22278c7ed69fcd6b359919323f115aad' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [
       {
         src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAE-PU-PMtd1h8FbQMVhZZw6hYWBHgJknI&libraries=places'
+      },
+      {
+        src: 'https://www.googletagmanager.com/gtag/js?id=UA-169315754-1',
+        async: true
+      },
+      {
+        src: '/scripts/tracking_1.js',
+        nonce: 'Nizrpn_1wyRF5bxLrBxQng',
+        defer: true
+      },
+      {
+        src: '/scripts/pinterest_tag.js',
+        nonce: 'Nizrpn_1wyRF5bxLrBxQng',
+        defer: true
+      },
+      {
+        src: '/scripts/facebook_pixel.js',
+        nonce: 'Nizrpn_1wyRF5bxLrBxQng',
+        defer: true
+      },
+      {
+        src: '/scripts/mail_chimp.js',
+        nonce: 'Nizrpn_1wyRF5bxLrBxQng',
+        id: 'mcjs',
+        defer: true
+      },
+      {
+        src: '/scripts/snap_pixel.js',
+        type: 'text/javascript',
+        defer: true
       }
     ]
   },
@@ -72,7 +103,7 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxt/http', '@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios'],
 
   axios: {
     baseURL: 'http://localhost:8081'

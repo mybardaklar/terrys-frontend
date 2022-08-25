@@ -16,7 +16,7 @@
           </VCardTitle>
 
           <div class="fixedContainer__card__actions">
-            <VBtn color="primary" rounded>Birthday Flowers</VBtn>
+            <VBtn color="primary" rounded to="/categories/birthday">Birthday Flowers</VBtn>
             <VBtn color="primary purple" rounded>Tel: 1 (888) 507 9738</VBtn>
           </div>
 

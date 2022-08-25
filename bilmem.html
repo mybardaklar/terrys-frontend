@@ -1,0 +1,172 @@
+<script>
+  gtag('event', 'purchase', {
+    transaction_id: data.ORDERNO,
+    affiliation: 'Terrys Store',
+    value: Number(data.total),
+    items: data.products
+  });
+  var margin = 0;
+  if (data.total) {
+    margin = Number(data.total) * 0.37;
+    margin = parseFloat(margin).toFixed(2);
+  }
+  uet_report_conversion(margin);
+  gtag('event', 'conversion', {
+    send_to: 'AW-625352542/b6kbCNfksdMBEN6-mKoC',
+    value: Number(margin),
+    currency: 'USD'
+  });
+  //bing
+  pintrk(
+    'track',
+    'checkout',
+    {
+      value: data.total,
+      order_quantity: 1,
+      currency: 'USD',
+      product_ids: ['1414', '1415']
+    },
+    function (didInit, error) {
+      if (!didInit) {
+        console.log(error);
+      }
+    }
+  );
+  fbq(
+    'track',
+    'Purchase',
+    // begin parameter object data
+    {
+      value: Number(data.total),
+      currency: 'USD',
+      order_id: String(data.ORDERNO)
+    }
+    // end parameter object data
+  );
+  snaptr('track', 'PURCHASE', {
+    currency: 'USD',
+    price: Number(data.total),
+    transaction_id: String(data.ORDERNO)
+  });
+</script>
+<meta name="p:domain_verify" content="22278c7ed69fcd6b359919323f115aad" />
+<!-- Google Tag Manager -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-169315754-1"></script>
+<script nonce="Nizrpn_1wyRF5bxLrBxQng">
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'UA-169315754-1');
+  gtag('config', 'AW-625352542');
+  //BING
+  (function (w, d, t, r, u) {
+    var f, n, i;
+    (w[u] = w[u] || []),
+      (f = function () {
+        var o = { ti: '17222362' };
+        (o.q = w[u]), (w[u] = new UET(o)), w[u].push('pageLoad');
+      }),
+      (n = d.createElement(t)),
+      (n.src = r),
+      (n.async = 1),
+      (n.onload = n.onreadystatechange =
+        function () {
+          var s = this.readyState;
+          (s && s !== 'loaded' && s !== 'complete') ||
+            (f(), (n.onload = n.onreadystatechange = null));
+        }),
+      (i = d.getElementsByTagName(t)[0]),
+      i.parentNode.insertBefore(n, i);
+  })(window, document, 'script', '//bat.bing.com/bat.js', 'uetq');
+</script>
+<!-- Pinterest Tag -->
+<script nonce="Nizrpn_1wyRF5bxLrBxQng">
+  !(function (e) {
+    if (!window.pintrk) {
+      window.pintrk = function () {
+        window.pintrk.queue.push(Array.prototype.slice.call(arguments));
+      };
+      var n = window.pintrk;
+      (n.queue = []), (n.version = '3.0');
+      var t = document.createElement('script');
+      (t.async = !0), (t.src = e);
+      var r = document.getElementsByTagName('script')[0];
+      r.parentNode.insertBefore(t, r);
+    }
+  })('https://s.pinimg.com/ct/core.js');
+  pintrk('load', '2614225142777', { em: '<user_email_address>' });
+  pintrk('page');
+</script>
+<noscript>
+  <img
+    height="1"
+    width="1"
+    style="display: none"
+    alt=""
+    src="https://ct.pinterest.com/v3/?event=init&tid=2614225142777&pd[em]=<hashed_email_address>&noscript=1" />
+</noscript>
+<!-- end Pinterest Tag -->
+<!-- Facebook Pixel Code -->
+<script nonce="Nizrpn_1wyRF5bxLrBxQng">
+  !(function (f, b, e, v, n, t, s) {
+    if (f.fbq) return;
+    n = f.fbq = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    if (!f._fbq) f._fbq = n;
+    n.push = n;
+    n.loaded = !0;
+    n.version = '2.0';
+    n.queue = [];
+    t = b.createElement(e);
+    t.async = !0;
+    t.src = v;
+    s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s);
+  })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '350981376316085');
+  fbq('track', 'PageView');
+</script>
+<noscript
+  ><img
+    height="1"
+    width="1"
+    style="display: none"
+    src="https://www.facebook.com/tr?id=350981376316085&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+<!--Mail Chimp -->
+<script id="mcjs" nonce="Nizrpn_1wyRF5bxLrBxQng">
+  !(function (c, h, i, m, p) {
+    (m = c.createElement(h)),
+      (p = c.getElementsByTagName(h)[0]),
+      (m.async = 1),
+      (m.src = i),
+      p.parentNode.insertBefore(m, p);
+  })(
+    document,
+    'script',
+    'https://chimpstatic.com/mcjs-connected/js/users/6296b510b4875e543c2aaaf71/aea216a5a2d635d84ce126082.js'
+  );
+</script>
+<!-- Snap Pixel Code -->
+<script type="text/javascript">
+  (function (e, t, n) {
+    if (e.snaptr) return;
+    var a = (e.snaptr = function () {
+      a.handleRequest ? a.handleRequest.apply(a, arguments) : a.queue.push(arguments);
+    });
+    a.queue = [];
+    var s = 'script';
+    r = t.createElement(s);
+    r.async = !0;
+    r.src = n;
+    var u = t.getElementsByTagName(s)[0];
+    u.parentNode.insertBefore(r, u);
+  })(window, document, 'https://sc-static.net/scevent.min.js');
+  snaptr('init', '40139a4a-ad0a-41bd-9669-e40ce9dafbc7', { user_email: 'example@example.com' });
+  snaptr('track', 'PAGE_VIEW');
+</script>
+<!-- End Snap Pixel Code -->

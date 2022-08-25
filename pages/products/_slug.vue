@@ -140,7 +140,7 @@ export default {
 
       <VCol lg="9" sm="7" cols="12">
         <h6 class="text-overline font-weight-medium text--disabled">
-          <span v-text="product.tf_id"></span>
+          <span>{{ product.tf_id }}</span>
           <VTooltip right>
             <template #activator="{ on, attrs }">
               <VIcon size="16" v-bind="attrs" v-on="on">fas fa-circle-question</VIcon>
@@ -148,7 +148,7 @@ export default {
             <span>Item No. {{ product.tf_id }}</span>
           </VTooltip>
         </h6>
-        <h1 class="text-h4 font-weight-medium" v-text="product.img_alt_text"></h1>
+        <h1 class="text-h4 font-weight-medium">{{ product.img_alt_text }}</h1>
 
         <div class="mt-6">
           <div class="text-subtitle-1 font-weight-bold mb-2">Upgrade your bouquet</div>
@@ -161,10 +161,10 @@ export default {
                       <template #label>
                         <VContainer class="py-4 pr-4" fluid>
                           <div>
-                            <span v-text="sku.skuTypeName"></span>
-                            <strong
-                              class="pink--text"
-                              v-text="product.prices[sku.skuId].price"></strong>
+                            <span>{{ sku.skuTypeName }}</span>
+                            <strong class="pink--text">
+                              {{ product.prices[sku.skuId].price }}
+                            </strong>
                           </div>
                         </VContainer>
                       </template>
@@ -189,7 +189,7 @@ export default {
                     class="d-inline-block"
                     :alt="addon.addOnName"></VImg>
 
-                  <div class="text-subtitle-2 my-2 text-center" v-text="addon.addOnName"></div>
+                  <div class="text-subtitle-2 my-2 text-center">{{ addon.addOnName }}</div>
                   <div>
                     <VSelect
                       v-if="addon.addOnOptions"
@@ -229,7 +229,7 @@ export default {
 
     <VCard class="mt-6" outlined>
       <VCardTitle class="text-subtitle-1 font-weight-bold">Description</VCardTitle>
-      <VCardText v-text="product.description"></VCardText>
+      <VCardText>{{ product.description }}</VCardText>
     </VCard>
   </div>
 </template>

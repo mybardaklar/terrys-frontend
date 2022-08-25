@@ -11,6 +11,10 @@ export default {
     creditCardFormValidation: false
   }),
 
+  mounted() {
+    this.orderTracking();
+  },
+
   methods: {
     async nextStep() {
       // eslint-disable-next-line
@@ -25,10 +29,12 @@ export default {
             orderId: this.getOrderId
           });
 
+          // eslint-disable-next-line
           console.log(request);
           this.setCheckoutStep(4);
         }
       } catch (error) {
+        // eslint-disable-next-line
         console.log(error);
         this.setCheckoutStep(5);
       }

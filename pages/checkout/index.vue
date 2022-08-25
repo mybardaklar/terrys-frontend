@@ -29,15 +29,15 @@ export default {
 
     <div v-if="getCartOrderDetails.length > 0">
       <div v-if="getCheckoutStep !== undefined" class="mt-8">
-        <template v-if="getCheckoutStep === 4">
+        <div v-if="getCheckoutStep === 4">
           <CheckoutSuccessful />
-        </template>
+        </div>
 
-        <template v-else-if="getCheckoutStep === 5">
+        <div v-else-if="getCheckoutStep === 5">
           <CheckoutFailed />
-        </template>
+        </div>
 
-        <template v-else>
+        <div v-else>
           <VRow>
             <VCol xl="9" lg="8" cols="12">
               <VCard outlined>
@@ -86,7 +86,7 @@ export default {
               <CheckoutCartSummary class="mt-8" />
             </VCol>
           </VRow>
-        </template>
+        </div>
       </div>
     </div>
 

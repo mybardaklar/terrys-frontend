@@ -109,7 +109,98 @@ const mixin = {
       'setOrderDeliveryDate',
       'setTotalPrice',
       'setOrderId'
-    ])
+    ]),
+
+    orderTracking() {
+      const data = {
+        ORDERNO: this.getOrderId,
+        total: this.getTotalPrice,
+        products: this.getCartOrderDetails.map((item) => {
+          return {
+            id: item.product.productId,
+            name: item.product.name,
+            brand: `Terry's Florist`,
+            variant: item.product.sku_type,
+            price: item.product.price
+          };
+        })
+      };
+
+      // eslint-disable-next-line
+      gtag('event', 'purchase', {
+        transaction_id: data.ORDERNO,
+        affiliation: 'Terrys Store',
+        value: Number(data.total),
+        items: data.products
+      });
+      let margin = 0;
+      // eslint-disable-next-line
+      if (data.total) {
+        margin = Number(data.total) * 0.37;
+        margin = parseFloat(margin).toFixed(2);
+      }
+
+      // eslint-disable-next-line
+      gtag('event', 'conversion', {
+        send_to: 'AW-625352542/b6kbCNfksdMBEN6-mKoC',
+        value: Number(margin),
+        currency: 'USD'
+      });
+      // bing
+      // eslint-disable-next-line
+      pintrk(
+        'track',
+        'checkout',
+        {
+          value: data.total,
+          order_quantity: 1,
+          currency: 'USD',
+          product_ids: ['1414', '1415']
+        },
+        function (didInit, error) {
+          if (!didInit) {
+            // eslint-disable-next-line
+            console.log(error);
+          }
+        }
+      );
+      // eslint-disable-next-line
+      fbq(
+        'track',
+        'Purchase',
+        // begin parameter object data
+        {
+          value: Number(data.total),
+          currency: 'USD',
+          order_id: String(data.ORDERNO)
+        }
+        // end parameter object data
+      );
+      // eslint-disable-next-line
+      snaptr('track', 'PURCHASE', {
+        currency: 'USD',
+        price: Number(data.total),
+        transaction_id: String(data.ORDERNO)
+      });
+
+      // pinterest tag
+      // eslint-disable-next-line
+      pintrk('load', '2614225142777', { em: '<user_email_address>' });
+      // eslint-disable-next-line
+      pintrk('page');
+
+      // facebook pixel code
+      // eslint-disable-next-line
+      fbq('init', '350981376316085');
+      // eslint-disable-next-line
+      fbq('track', 'PageView');
+
+      // snap pixel code
+      // eslint-disable-next-line
+      snaptr('init', '40139a4a-ad0a-41bd-9669-e40ce9dafbc7', { user_email: 'example@example.com' });
+      // eslint-disable-next-line
+      snaptr('track', 'PAGE_VIEW');
+    }
   }
 };
 
