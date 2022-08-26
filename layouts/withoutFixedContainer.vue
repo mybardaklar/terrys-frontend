@@ -6,7 +6,12 @@ import MainHeader from '~/components/MainHeader/MainHeader.vue';
 import MainFooter from '~/components/MainFooter/MainFooter.vue';
 
 export default {
-  components: { CartDrawerNavigation, MobileBottomSheet, UserModal, MainHeader, MainFooter }
+  components: { CartDrawerNavigation, MobileBottomSheet, UserModal, MainHeader, MainFooter },
+  mounted() {
+    if (this.getCart.order_status === 'closed') {
+      this.resetCart();
+    }
+  }
 };
 </script>
 

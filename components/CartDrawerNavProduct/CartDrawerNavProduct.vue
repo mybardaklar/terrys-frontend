@@ -14,7 +14,7 @@
       <div class="text-caption mt-1" style="line-height: 1.4">
         <div v-for="(extra, index) in extras" :key="index" class="mt-1">
           <div>
-            <strong>extra.addOnOptions[0].name</strong>
+            <strong>{{ extra.addOnOptions[0].name }}</strong>
             <span>{{ `(${extra.addOnName})` }}</span>
           </div>
           <strong class="d-block pink--text">

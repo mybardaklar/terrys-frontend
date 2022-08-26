@@ -27,7 +27,7 @@ export default {
       <VImg src="/images/banner-memorial.webp"></VImg>
     </div>
 
-    <div v-if="getCartOrderDetails.length > 0">
+    <div v-show="getCartOrderDetails.length > 0">
       <div v-if="getCheckoutStep !== undefined" class="mt-8">
         <div v-if="getCheckoutStep === 4">
           <CheckoutSuccessful />
@@ -90,7 +90,7 @@ export default {
       </div>
     </div>
 
-    <VCard v-else outlined class="mt-8">
+    <VCard v-show="getCartOrderDetails.length === 0" outlined class="mt-8">
       <VCardText>
         <div class="text-overline text-center">Your cart is empty.</div>
       </VCardText>

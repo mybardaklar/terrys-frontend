@@ -2,7 +2,8 @@
 export default {
   data: () => ({
     formValidation: false,
-    autocomplete: null
+    autocomplete: null,
+    subscribeEmail: true
   }),
   mounted() {},
   methods: {
@@ -98,7 +99,7 @@ export default {
             (e) => {
               updateUser({ value: e, key: 'firstname' });
             }
-          "></VTextField>
+          " />
       </VCol>
 
       <VCol sm="6" cols="12">
@@ -114,7 +115,7 @@ export default {
             (e) => {
               updateUser({ value: e, key: 'lastname' });
             }
-          "></VTextField>
+          " />
       </VCol>
 
       <VCol sm="6" cols="12">
@@ -132,7 +133,7 @@ export default {
             (e) => {
               updateUser({ value: e, key: 'phone' });
             }
-          "></VTextField>
+          " />
       </VCol>
 
       <VCol sm="6" cols="12">
@@ -148,7 +149,7 @@ export default {
             (e) => {
               updateUser({ value: e, key: 'email' });
             }
-          "></VTextField>
+          " />
       </VCol>
 
       <VCol sm="6" cols="12">
@@ -166,7 +167,7 @@ export default {
             (e) => {
               updateUser({ value: e, key: 'address1' });
             }
-          "></VTextField>
+          " />
       </VCol>
 
       <VCol sm="6" cols="12">
@@ -183,7 +184,7 @@ export default {
             (e) => {
               updateUser({ value: e, key: 'address2' });
             }
-          "></VTextField>
+          " />
       </VCol>
 
       <VCol md="4" cols="12">
@@ -199,7 +200,7 @@ export default {
             (e) => {
               updateUser({ value: e, key: 'city' });
             }
-          "></VTextField>
+          " />
       </VCol>
 
       <VCol md="4" cols="12">
@@ -215,7 +216,7 @@ export default {
             (e) => {
               updateUser({ value: e, key: 'state' });
             }
-          "></VTextField>
+          " />
       </VCol>
 
       <VCol md="4" cols="12">
@@ -232,6 +233,15 @@ export default {
               updateUser({ value: e, key: 'zipcode' });
             }
           " />
+      </VCol>
+
+      <VCol cols="12">
+        <VCheckbox
+          v-model="subscribeEmail"
+          color="green"
+          hide-details="auto"
+          label="Subscribe with this email for more discounts."
+          class="mt-0" />
       </VCol>
 
       <VCol cols="6">

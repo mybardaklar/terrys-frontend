@@ -166,6 +166,38 @@ export const mutations = {
 
   SET_ORDER_ID(state, value) {
     state.cart.order_id = value;
+  },
+
+  SET_CART_ID(state, value) {
+    state.cart.id = value;
+  },
+
+  SET_CART(state, value) {
+    state.cart = value;
+  },
+
+  RESET_CART(state) {
+    state.cart = {
+      id: null,
+      order_id: null,
+      order_tag: 'new_order',
+      order_status: 'open',
+      details: {
+        total_price: 0,
+        price: 0,
+        discount_code: '',
+        discount_percent: 0,
+        total_discount_price: 0,
+        product_count: 0,
+        tax_rate: 7,
+        total_tax: 7,
+        service_fee: 15,
+        customerTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+      },
+      customerId: null,
+      bankId: null,
+      order_details: []
+    };
   }
 };
 
@@ -252,6 +284,18 @@ export const actions = {
 
   setOrderId({ commit }, newValue) {
     commit('SET_ORDER_ID', newValue);
+  },
+
+  setCartId({ commit }, newValue) {
+    commit('SET_CART_ID', newValue);
+  },
+
+  setCart({ commit }, newValue) {
+    commit('SET_CART', newValue);
+  },
+
+  resetCart({ commit }) {
+    commit('RESET_CART');
   }
 };
 
@@ -306,5 +350,13 @@ export const getters = {
 
   getOrderId(state) {
     return state.cart.order_id;
+  },
+
+  getCartId(state) {
+    return state.cart.id;
+  },
+
+  getOrderStatus(state) {
+    return state.cart.order_status;
   }
 };

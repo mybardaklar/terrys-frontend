@@ -63,7 +63,8 @@ export default {
     ],
     useSameAddress: false,
     dateModalValue: false,
-    dateModalIndex: 0
+    dateModalIndex: 0,
+    date: ''
   }),
 
   computed: {
@@ -87,7 +88,9 @@ export default {
     }
   },
 
-  mounted() {},
+  mounted() {
+    console.log(this.getCart);
+  },
 
   methods: {
     useSameAddressMethod() {
@@ -125,7 +128,7 @@ export default {
     },
 
     saveDeliveryDate(e) {
-      this.setOrderDeliveryDate({ index: this.dateModalIndex, date: e });
+      this.setOrderDeliveryDate({ index: this.dateModalIndex, date: new Date(e).getTime() });
       this.dateModalValue = false;
     },
 
@@ -196,15 +199,26 @@ export default {
       });
     },
 
+    dateControl(e) {
+      if (e.toString().length === 13) {
+        return this.$dateFns.format(new Date(Number(e)), 'yyyy-MM-dd');
+      } else {
+        return e;
+      }
+    },
+
     async nextStep() {
       if (this.formValidation) {
         try {
-          const request = await this.$axios.$post('/api/orders/orderCreate', this.getCart);
+          if (!this.getCartId && !this.getOrderId && this.getOrderStatus !== 'open') {
+            const request = await this.$axios.$post('/api/orders/orderCreate', this.getCart);
 
-          if (request) {
-            this.setOrderId(request.order_id);
-            this.setCheckoutStep(3);
+            if (request) {
+              this.setCart(request);
+            }
           }
+
+          this.setCheckoutStep(3);
         } catch (error) {
           // eslint-disable-next-line
           console.log(error);
@@ -253,7 +267,16 @@ export default {
                 <VCard v-if="detail.delivery_date" class="mt-4" outlined>
                   <VCardText>
                     <strong>Delivery Date:</strong>
-                    <span>{{ detail.delivery_date }}</span>
+                    <span>
+                      {{
+                        new Date(detail.delivery_date).toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })
+                      }}
+                    </span>
                   </VCardText>
                 </VCard>
               </VCol>
@@ -276,13 +299,12 @@ export default {
 
           <VDialog v-model="dateModalValue" persistent width="100%" max-width="320">
             <VDatePicker
-              :value="getCartOrderDetails[index].delivery_date"
+              :value="dateControl(getCartOrderDetails[index].delivery_date)"
               color="green"
               :min="getCurrentDate"
               :allowed-dates="allowedDates"
               scrollable
-              @input="(e) => saveDeliveryDate(e)">
-            </VDatePicker>
+              @input="(e) => saveDeliveryDate(e)" />
           </VDialog>
 
           <VContainer class="py-8">

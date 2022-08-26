@@ -114,7 +114,8 @@ export default {
           placeholder="Product name or SKU ID"
           outlined
           dense
-          hide-details="auto"></VTextField>
+          hide-details="auto"
+          color="green"></VTextField>
       </VCol>
     </VRow>
 

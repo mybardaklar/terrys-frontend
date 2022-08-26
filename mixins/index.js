@@ -85,7 +85,9 @@ const mixin = {
       'getTotalPrice',
       'getCheckoutStep',
       'getUser',
-      'getOrderId'
+      'getOrderId',
+      'getCartId',
+      'getOrderStatus'
     ])
   },
 
@@ -108,7 +110,8 @@ const mixin = {
       'setOrderZipCode',
       'setOrderDeliveryDate',
       'setTotalPrice',
-      'setOrderId'
+      'setCart',
+      'resetCart'
     ]),
 
     orderTracking() {

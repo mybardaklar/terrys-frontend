@@ -14,6 +14,11 @@ export default {
     MainHeader,
     FixedContainer,
     MainFooter
+  },
+  mounted() {
+    if (this.getCart.order_status === 'closed') {
+      this.resetCart();
+    }
   }
 };
 </script>
